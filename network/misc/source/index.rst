@@ -12,5 +12,6 @@ Contents:
 
    vlan_stp
    acl
+   snmp
 
 
