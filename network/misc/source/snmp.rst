@@ -3,7 +3,7 @@ SNMP - Simple Network Management Protocol
 ===========================================
 
 :Version:
-    1.0 of 2011/03/10
+    1.0 of 2011/03/31
 
 :Author:
     SUZUKI Masashi / masasuzu
@@ -14,17 +14,25 @@ SNMP - Simple Network Management Protocol
 Agenda
 =======
 
+#. 監視について
 #. SNMPの概要
-#. SNMPのバージョン
-#. オブジェクトID
+#. Net-SNMP
 #. プログラムからSNMPにアクセスする
+
+監視について
+===============
+
+TODO:監視について触れておく。性能監視とか、障碍監視とか
+
 
 SNMPの概要
 =====================
 
-ネットワーク管理と各種モニタリングのためのプロトコル。
+ネットワーク管理と各種モニタリングのための **シンプルな** プロトコル。
 
 対象はルータやスイッチに限らず、Unixシステム、Windows、プリンタ、電源、WEBサーバ、DBサーバを監視できます。
+
+TODO: この記述はちょっと語弊がある。
 
 SNMPの機能
 ------------
@@ -142,7 +150,7 @@ MIBとは、管理オブジェクトをまとめて1つのデータベースと�
 MIBはオブジェクトID(OID)を使用した木構造で、管理オブジェクトを管理しています。\
 これをMIBツリーといいます。
 
-SNMPではiso(6).org(3).dod(6).internnet(1)から下のOIDを使用します。これは、OIDが、\
+SNMPではiso(1).org(3).dod(6).internnet(1)から下のOIDを使用します。これは、OIDが、\
 SNMP以外でも使用されるためです。
 
 
@@ -346,20 +354,30 @@ Trap-PDUの内容以下の通りです。
 SNMPv3
 -------
 
+TODO: v3についても触れておく、けどめんどう…。
+
 っね、シンプルでしょ。。。。
 
-SNMPコマンド
+Net-SNMP
 ==============
 
+TODO: snmpd.confの設定とかコマンドについて触れておく、トラップの飛ばし方、受け方とか。
+
 net-snmp古くはucd-snmp
+
+* http://www.net-snmp.org/
 
 * snmpget
 * snmpwalk
 
+::
+
+    snmpwalk -v 2c -c private -On localhost system
+    snmpwalk -v 2c -c private -On localhost .1.3.6.1.2.1.1
 PerlからSNMPをいじってみる
 ==========================
 
-Net::SNMP
+TODO: Net::SNMPの簡単な使い方とか
 
 
 参考文献
