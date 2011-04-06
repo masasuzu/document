@@ -3,7 +3,7 @@ SNMP - Simple Network Management Protocol
 ===========================================
 
 :Version:
-    1.0 of 2011/03/31
+    1.0 of 2011/04/06
 
 :Author:
     SUZUKI Masashi / masasuzu
@@ -463,7 +463,8 @@ snmptrapコマンドでtrapを送信することができます。snmptrapdが�
 PerlからSNMPをいじってみる
 ==========================
 
-TODO: Net::SNMPの簡単な使い方とか
+Net::SNMPを使うのが一般的です。
+App::MadEye::Util::snmp_session()やApp::MadEye::Plugin::Agent::SNMP::* あたりで使用されてます。
 
 
 参考文献
