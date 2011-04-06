@@ -390,45 +390,76 @@ SNMPv3
 Net-SNMP
 ==============
 
-TODO: snmpd.confの設定とかコマンドについて触れておく、トラップの飛ばし方、受け方とか。
-
-net-snmp古くはucd-snmp
+Debianの標準のsnmpクライアント/サーバはnet-snmpです。古くはucd-snmpと呼ばれていました。
 
 * http://www.net-snmp.org/
 
-* snmpget
-* snmpwalk
+インストール
+-------------
+
+::
+
+    sudo aptitude insntall snmpd # サーバ
+    sudo aptitude insntall snmp  # クライアント
+
 
 snmpdの設定
 ------------------
+
+/etc/snmp/snmpd.confの設定
+
+.. literalinclude:: config/snmpd.conf
+    :linenos:
+
+
+/etc/default/snmpdの設定
+
+.. literalinclude:: config/snmpd
+    :linenos:
+
+snmpコマンドで情報を取得してみる
+----------------------------------
+
+::
+
+    snmpwalk -v 2c -c private -On localhost system
+    snmpwalk -v 2c -c private -On localhost .1.3.6.1.2.1.1
+
 
 
 snmptrapdの設定
 -----------------
 
+/etc/snmp/snmptrapd.confの設定
+
 ::
 
-    # sudo vim /etc/snmp/snmptrapd.conf
     # 受け付けるコミュニティの設定
     authCommunity log,execute,net public
 
-    # sudo vim /etc/default/snmpd
+/etc/default/snmpdの設定
+
+::
+
     # snmpd起動時にsnmptrapdを起動する
+    #TRAPDRUN=no
     TRAPDRUN=yes
 
-    # snmpd再起動
-    sudo /etc/init.d/snmpd restart
+snmptrapを受信してみる
+------------------------
+
+snmptrapコマンドでtrapを送信することができます。snmptrapdが受信したトラップはsyslogに記録されます。
+
+::
 
     # トラップ送信
     snmptrap -v 2c -c public masalab01.intra '' .1.3.6.1.4.1.311.1.1.3.1.2 .1.3.6.1.4.1.311.1.1.3.1.2 s "Test Trap"
 
-    # /var/log/syslog
+    # lv /var/log/syslog
     Apr  6 09:52:19 masalab01 snmptrapd[19185]: 2011-04-06 09:52:19 172.16.201.118 [UDP: [172.16.201.118]:32972]:#012DISMAN-EVENT-MIB::sysUpTimeInstance = Timeticks: (768473162) 88 days, 22:38:51.62#011SNMPv2-MIB::snmpTrapOID.0 = OID: SNMPv2-SMI::enterprises.311.1.1.3.1.2#011SNMPv2-SMI::enterprises.311.1.1.3.1.2 = STRING: "Test Trap
     "
 
-::
-    snmpwalk -v 2c -c private -On localhost system
-    snmpwalk -v 2c -c private -On localhost .1.3.6.1.2.1.1
+
 PerlからSNMPをいじってみる
 ==========================
 
