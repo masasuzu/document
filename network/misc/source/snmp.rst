@@ -468,8 +468,21 @@ PerlからSNMPをいじってみる
 ==========================
 
 Net::SNMPを使うのが一般的です。
+
+* http://search.cpan.org/~dtown/Net-SNMP-v6.0.1/lib/Net/SNMP.pm
+
 App::MadEye::Util::snmp_session()やApp::MadEye::Plugin::Agent::SNMP::* あたりで使用されてます。
 
+* http://search.cpan.org/~tokuhirom/App-MadEye-0.07/lib/App/MadEye.pm
+
+でも、CloudforecastではSNMPを使っています。
+
+
+サンプルコード
+---------------
+
+.. literalinclude:: perl/snmp_sample.pl
+    :linenos:
 
 参考文献
 ========
