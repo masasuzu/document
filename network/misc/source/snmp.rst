@@ -423,6 +423,10 @@ snmpdの設定
     :language: none
     :linenos:
 
+* 参考:snmpd.conf
+
+  * http://archive.linux.or.jp/JM/html/ucd-snmp/man5/snmpd.conf.5.html
+
 snmpコマンドで情報を取得してみる
 ----------------------------------
 
