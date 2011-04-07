@@ -409,22 +409,35 @@ snmpdの設定
 /etc/snmp/snmpd.confの設定
 
 .. literalinclude:: config/snmpd.conf
+    :language: none
     :linenos:
 
 
 /etc/default/snmpdの設定
 
 .. literalinclude:: config/snmpd
+    :language: none
     :linenos:
 
 snmpコマンドで情報を取得してみる
 ----------------------------------
 
+OID直打ちでも、OIDのエイリアスでもOKです。snmpwalkはget-next-requestとget-bulk-requestを\
+駆使して指定OID以下をごそっと取ってくる便利なコマンドです。
+
+
+-Oコマンドで出力形式を変更することができます。nで数値形式、fで省略なしのOID名が出力されます。
+
 ::
 
-    snmpwalk -v 2c -c private -On localhost system
-    snmpwalk -v 2c -c private -On localhost .1.3.6.1.2.1.1
+    [ LAB ] masasuzu@masalab01% snmpwalk -v 2c -c private localhost .1.3.6.1.2.1.1.1
+    SNMPv2-MIB::sysDescr.0 = STRING: Linux masalab01 2.6.30-1-686 #1 SMP Sun Jun 14 16:11:32 UTC 2009 i686
 
+    [ LAB ] masasuzu@masalab01% snmpwalk -v 2c -c private -Of localhost system.sysDescr
+    .iso.org.dod.internet.mgmt.mib-2.system.sysDescr.0 = STRING: Linux masalab01 2.6.30-1-686 #1 SMP Sun Jun 14 16:11:32 UTC 2009 i686
+
+    [ LAB ] masasuzu@masalab01% snmpwalk -v 2c -c private -On localhost system.sysDescr
+    .1.3.6.1.2.1.1.1.0 = STRING: Linux masalab01 2.6.30-1-686 #1 SMP Sun Jun 14 16:11:32 UTC 2009 i686
 
 
 snmptrapdの設定
@@ -453,16 +466,10 @@ snmptrapコマンドでtrapを送信することができます。snmptrapdが�
 ::
 
     # トラップ送信
-    snmptrap -v 2c -c public masalab01.intra '' .1.3.6.1.4.1.311.1.1.3.1.2 .1.3.6.1.4.1.311.1.1.3.1.2 s "Test Trap"
+    [ LAB ] masasuzu@masalab01% snmptrap -v 2c -c public masalab01.intra '' .1.3.6.1.4.1.311.1.1.3.1.2 .1.3.6.1.4.1.311.1.1.3.1.2 s "Test Trap"
 
     # lv /var/log/syslog
-    Apr  6 09:52:19 masalab01 snmptrapd[19185]: 2011-04-06 09:52:19 172.16.201.118 [UDP: [172.16.201.118]:32972]:#012DISMAN-EVENT-MIB::sysUpTimeInstance = Timeticks: (768473162) 88 days, 22:38:51.62#011SNMPv2-MIB::snmpTrapOID.0 = OID: SNMPv2-SMI::enterprises.311.1.1.3.1.2#011SNMPv2-SMI::enterprises.311.1.1.3.1.2 = STRING: "Test Trap
-    "
-
-::
-
-    snmpwalk -v 2c -c private -On localhost system
-    snmpwalk -v 2c -c private -On localhost .1.3.6.1.2.1.1
+    Apr  6 09:52:19 masalab01 snmptrapd[19185]: 2011-04-06 09:52:19 172.16.201.118 [UDP: [172.16.201.118]:32972]:#012DISMAN-EVENT-MIB::sysUpTimeInstance = Timeticks: (768473162) 88 days, 22:38:51.62#011SNMPv2-MIB::snmpTrapOID.0 = OID: SNMPv2-SMI::enterprises.311.1.1.3.1.2#011SNMPv2-SMI::enterprises.311.1.1.3.1.2 = STRING: "Test Trap"
 
 PerlからSNMPをいじってみる
 ==========================
@@ -477,12 +484,15 @@ App::MadEye::Util::snmp_session()やApp::MadEye::Plugin::Agent::SNMP::* あた�
 
 でも、CloudforecastではSNMPを使っています。
 
+* https://github.com/kazeburo/cloudforecast
 
 サンプルコード
 ---------------
 
 .. literalinclude:: perl/snmp_sample.pl
+    :language: perl
     :linenos:
+
 
 参考文献
 ========
