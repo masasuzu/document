@@ -66,9 +66,41 @@ Gitは
 用語
 ---------------------------------
 
+HEAD
+    現在チェックアウトされているコミット、ブランチのこと。
+
+INDEX
+    コミット対象のファイル、状態のこと。
+
+ワークツリー
+    レポジトリの内容がディレクトリに展開されたもの。
+    作業ファイルのこと。
+
 
 実践Git
 =================================
+
+よく使いそうなGitコマンドを紹介していくよ。
+
+基本ワークフロー
+---------------------------------
+
+::
+
+    # ソースコードを編集
+
+    # ファイルをINDEXに上げる
+    git add $FILENAME
+
+    # ファイルをコミットする
+    git commit -av
+
+    # 編集している間に入ったリモートレポジトリの変更を反映する
+    git pull --rebase
+
+    # ローカルの変更をリモートレポジトリに反映する
+    git push
+
 
 新規ローカルレポジトリの作成
 ---------------------------------
@@ -82,6 +114,13 @@ Gitは
     git add .
     # 変更をコミット
     git commit -m 'initial commit'
+
+リモートレポジトリからコピーしてくる
+-------------------------------------
+
+::
+
+    git clone $REMOTEREPOSITORY
 
 
 ファイルをINDEXに上げる
@@ -128,6 +167,9 @@ Gitは
     # INDEXに上がっていない、変更された管理対象ファイルの差分を確認する
     git diff
 
+    # INDEXに上がっているファイルも含め、変更された管理対象ファイルの差分を確認する
+    git diff HEAD
+
     # 直前のコミットを見る
     git show
 
@@ -164,9 +206,48 @@ Gitは
     git pull --rebase
     git push
 
+ブランチを操作する
+------------------------------------------
+
+::
+
+    # ブランチをリストアップする
+    git branch
+
+    # ブランチを作成する
+    git branch $BRANCHNAME
+
+    # ブランチを切り替える
+    git checkout -b $BRANCHNAME
+
+    # ブランチを作成してそのブランチに切り替える
+    git checkout -b $BRANCHNAME
+
+    # マージ済みのブランチを削除する
+    git branch -d $BRANCHNAME
+
+    # ブランチを強制削除する
+    git branch -D $BRANCHNAME
+
+
+コミットをやり直す
+------------------------------------------
+
+::
+
+    # 直前のコミットを取り消す
+    git reset 'HEAD^'
+
+    # 直前のコミットに変更を付け足す
+    git commit --amend
+
+    # 歴史を(コミット3件分)改竄する
+    git commit -i 'HEAD~3'
+
 私とGit
 =================================
 
+私が仕事で使うテンプレ的なワークフローを紹介するよ。
 
 さて仕事を始めるか
 ---------------------------------
@@ -188,8 +269,7 @@ Gitは
 
     git checkout master
     git pull --rebase
-    git branch topic/hoge-feature
-    git checkout topic/hoge-feature
+    git checkout -b topic/hoge-feature
 
     #... edit and test ...
 
@@ -214,8 +294,7 @@ Gitは
 ::
 
     git checkout master
-    git branch fix/hoge-bug
-    git checkout fix/hoge-bug
+    git checkout -b fix/hoge-bug
 
     #... edit and pray ...
 
