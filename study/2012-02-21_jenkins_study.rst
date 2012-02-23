@@ -11,6 +11,7 @@ Jenkis勉強会@楽天
 
 * DEV@Cloud
 
+  * http://www.cloudbees.com/dev.cb
   * Jenkisのホスティングサービス
   * EC2上で稼働
 
