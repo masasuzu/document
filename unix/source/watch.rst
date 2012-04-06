@@ -37,7 +37,71 @@ CPU負荷が高いサーバをCUPバウンドなサーバ、I/O負荷が高い�
 プロセスの状態遷移
 ====================================
 
-プロセスディスクリプタの話
++-----------------------+-------------------------------------------------------+
+| 状態                  | 説明                                                  |
++=======================+=======================================================+
+| TASK_RUNNING          | タスクが実行可能な状態                                |
++-----------------------+-------------------------------------------------------+
+| TASK_INTERRUPTIBLE    | 割り込み可能な待ち状態。入力待ちなど                  |
++-----------------------+-------------------------------------------------------+
+| TASK_UNINTERRUPTIBLE  | 割り込み不可能な待ち状態。ディスクの入出力待ちなど    |
++-----------------------+-------------------------------------------------------+
+| TASK_STOPPED          | サスペンド状態                                        |
++-----------------------+-------------------------------------------------------+
+| TASK_ZOMBIE           | ゾンビ状態                                            |
++-----------------------+-------------------------------------------------------+
+
+* SEE ALSO; http://sourceforge.jp/projects/linux-kernel-docs/wiki/internal22-6-%E3%83%97%E3%83%AD%E3%82%BB%E3%82%B9%E3%81%AE%E7%8A%B6%E6%85%8B%E9%81%B7%E7%A7%BB
+
+
+
+::
+
+    プロセスの状態遷移図(簡略)
+
+                    実行待ち            scheduling         実行中
+    ---------> TASK_RUNNING(READY)  ------------------> TASK_RUNNING
+    generate           ^            <-----------------      |
+                       |                preempt             |
+                       |                                    |
+                       |          イベント待ち              |
+                       +----- TASK_INTERRUPTIBLE   <--------+
+                              TASK_UNINTERRUPTIBLE
+                       wake_up                          sleep_on
+                       interruptiple_wake_on            interruptiple_sleep_on
+
+
+
+プロセスの状態のうちロードアベレージに換算されるのは、TASK_RUNNINGとTASK_UNINTERRUPTIBLEのみです。
+つまり、CPUの実行権限が与えられるのを待っているプロセスとディスクI/Oが完了するのを待っているプロセスのみとなります。
+ロードアベレージが高い場合、どちらに起因するのかを考えなければなりません。
+
+ps
+------------------------------------
+
+ちなむとpsコマンドでプロセスの実行状態を参照することができます。
+
+::
+
+    PROCESS STATE CODES
+           Here are the different values that the s, stat and state output specifiers (header "STAT" or "S") will display to describe the state of a process.
+           D    Uninterruptible sleep (usually IO)
+           R    Running or runnable (on run queue)
+           S    Interruptible sleep (waiting for an event to complete)
+           T    Stopped, either by a job control signal or because it is being traced.
+           W    paging (not valid since the 2.6.xx kernel)
+           X    dead (should never be seen)
+           Z    Defunct ("zombie") process, terminated but not reaped by its parent.
+
+           For BSD formats and when the stat keyword is used, additional characters may be displayed:
+           <    high-priority (not nice to other users)
+           N    low-priority (nice to other users)
+           L    has pages locked into memory (for real-time and custom IO)
+           s    is a session leader
+           l    is multi-threaded (using CLONE_THREAD, like NPTL pthreads do)
+           +    is in the foreground process group
+
+
 
 メモリ
 ====================================
