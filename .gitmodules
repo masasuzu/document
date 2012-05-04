@@ -1,3 +1,0 @@
-[submodule "html"]
-	path = build/html
-	url = git@github.com:masasuzu/document.git
