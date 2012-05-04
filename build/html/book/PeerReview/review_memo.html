@@ -1,0 +1,245 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>レビューでいいのか検討 &mdash; masasuzu docs 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="masasuzu docs 1.0 documentation" href="../../index.html" />
+    <link rel="up" title="独書メモ" href="../index.html" />
+    <link rel="next" title="勉強会とかのメモ" href="../../study/index.html" />
+    <link rel="prev" title="レビューでいいのか検討" href="" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../study/index.html" title="勉強会とかのメモ"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="#" title="レビューでいいのか検討"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../index.html">masasuzu docs 1.0 documentation</a> &raquo;</li>
+          <li><a href="../index.html" accesskey="U">独書メモ</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="id1">
+<h1>レビューでいいのか検討<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="id2">
+<h2>レビューのルール<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>事前<ul>
+<li>レビューの観点<ul>
+<li>個々に割り当て？</li>
+<li>全員同じ？</li>
+</ul>
+</li>
+<li>計画</li>
+<li>日程調整</li>
+<li>レビュー方針の決定</li>
+<li>終了条件の決定</li>
+</ul>
+</li>
+<li>レビュー中<ul>
+<li>欠陥の指摘</li>
+<li>欠陥の記録</li>
+<li>欠陥を修正すべきか討論</li>
+<li>修正(すべき)事項の決定</li>
+</ul>
+</li>
+<li>事後<ul>
+<li>作成者が修正</li>
+<li>モデレータが修正事項の確認<ul>
+<li>未達成の場合<ul>
+<li>再修正</li>
+<li>再レビュー</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="id3">
+<h2>チェックリスト<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>対象は？<ul>
+<li>ドキュメント<ul>
+<li>記述漏れ</li>
+<li>記述ミス</li>
+<li>記述過多</li>
+<li>上位ドキュメントとの整合性</li>
+</ul>
+</li>
+<li>ソースコード<ul>
+<li>可読性<ul>
+<li>タブとスペースの混在</li>
+<li>適切な括弧付け</li>
+<li>適切なコメント</li>
+</ul>
+</li>
+<li>保守性<ul>
+<li>同じような処理を行っている関数、メソッド</li>
+<li>変数名、クラス名、関数名に規則性</li>
+<li>極端に短い変数名、クラス名、関数名</li>
+<li>例外処理の検討漏れ</li>
+<li>初期化漏れ</li>
+<li>車輪の再発明</li>
+<li>テストコードの欠如</li>
+<li>多すぎる引数</li>
+<li>適切なスコープ</li>
+<li>グローバル変数の多用</li>
+</ul>
+</li>
+<li>記述ミス</li>
+<li>設計ミス</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="id4">
+<h2>司会の手引きについて<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>やること<ul>
+<li>事前<ul>
+<li>レビューのスケジューリング<ul>
+<li>日付</li>
+<li>時間</li>
+<li>場所</li>
+<li>参加要請</li>
+</ul>
+</li>
+<li>開始基準のチェック<ul>
+<li>レビューに耐えうるものか</li>
+<li>時間を無駄にしないため</li>
+</ul>
+</li>
+<li>レビュー範囲の決定</li>
+<li>レビューの観点の設定</li>
+<li>キックオフ<ul>
+<li>レビュー目的の確認</li>
+<li>レビュー対象の配布</li>
+<li>全員の認識あわせ</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>レビュー中<ul>
+<li>レビューの運営</li>
+<li>進行ペースの調整</li>
+</ul>
+</li>
+<li>事後<ul>
+<li>修正の確認</li>
+<li>レビュープロセスの分析</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>心得<ul>
+<li>個人攻撃をしないさせない</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">レビューでいいのか検討</a><ul>
+<li><a class="reference internal" href="#id2">レビューのルール</a></li>
+<li><a class="reference internal" href="#id3">チェックリスト</a></li>
+<li><a class="reference internal" href="#id4">司会の手引きについて</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href=""
+                        title="previous chapter">レビューでいいのか検討</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../../study/index.html"
+                        title="next chapter">勉強会とかのメモ</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../_sources/book/PeerReview/review_memo.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../study/index.html" title="勉強会とかのメモ"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="#" title="レビューでいいのか検討"
+             >previous</a> |</li>
+        <li><a href="../../index.html">masasuzu docs 1.0 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >独書メモ</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2012, masasuzu / SUZUKI Masashi.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.2.
+    </div>
+  </body>
+</html>

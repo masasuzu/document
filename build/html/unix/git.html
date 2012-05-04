@@ -1,0 +1,445 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Git tutorial &mdash; masasuzu docs 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="masasuzu docs 1.0 documentation" href="../index.html" />
+    <link rel="up" title="Unix関連の雑多な記事" href="index.html" />
+    <link rel="next" title="Watch Your Server" href="watch.html" />
+    <link rel="prev" title="Unix関連の雑多な記事" href="index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="watch.html" title="Watch Your Server"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Unix関連の雑多な記事"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">masasuzu docs 1.0 documentation</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Unix関連の雑多な記事</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="git-tutorial">
+<h1>Git tutorial<a class="headerlink" href="#git-tutorial" title="Permalink to this headline">¶</a></h1>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Version:</th><td class="field-body">1.0 of 2011/05/08</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Author:</th><td class="field-body">SUZUKI Masashi / masasuzu</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Mail:</th><td class="field-body"><a class="reference external" href="mailto:m15&#46;suzuki&#46;masashi&#37;&#52;&#48;gmail&#46;com">m15<span>&#46;</span>suzuki<span>&#46;</span>masashi<span>&#64;</span>gmail<span>&#46;</span>com</a></td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="agenda">
+<h2>Agenda<a class="headerlink" href="#agenda" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li>バージョン管理とは</li>
+<li>Gitの概要</li>
+<li>Gitの基本操作</li>
+<li>実践Git</li>
+<li>私とGit</li>
+</ol>
+</div>
+<div class="section" id="id1">
+<h2>バージョン管理とは<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<p>from wikipedia 先生</p>
+<ul class="simple">
+<li><a class="reference external" href="http://ja.wikipedia.org/wiki/%E3%83%90%E3%83%BC%E3%82%B8%E3%83%A7%E3%83%B3%E7%AE%A1%E7%90%86%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0">http://ja.wikipedia.org/wiki/%E3%83%90%E3%83%BC%E3%82%B8%E3%83%A7%E3%83%B3%E7%AE%A1%E7%90%86%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0</a></li>
+</ul>
+<div class="highlight-python"><pre>バージョン管理システム（バージョンかんりシステム）とは、コンピュータ上で作成、
+編集されるファイルの変更履歴を管理するためのシステム。
+特にソフトウェア開発においてソースコードの管理に用いられることが多い。</pre>
+</div>
+<div class="section" id="id2">
+<h3>なんでバージョン管理するの?<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<p>バージョン管理することによって</p>
+<ul class="simple">
+<li>過去に正常に動いていたバージョンに簡単に戻せる。</li>
+<li>多人数で開発する際、容易に最新バージョンにアクセスすることができる。</li>
+</ul>
+</div>
+<div class="section" id="id3">
+<h3>集中型と分散型<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>集中型バージョン管理システム<ul>
+<li>1つの中央レポジトリに対してクライアントがアクセス(checkout, commit)することができる。</li>
+</ul>
+</li>
+<li>分散型バージョン管理システム<ul>
+<li>複数のレポジトリを持つことができ相互にアクセス(pull, push)することができる。</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="git">
+<h2>Gitの概要<a class="headerlink" href="#git" title="Permalink to this headline">¶</a></h2>
+<p>Gitは</p>
+<ul class="simple">
+<li>分散バージョン管理システム。</li>
+<li>Linuxカーネル開発で使用されている。</li>
+<li>Bazaar、Mercurialのようば他の分散バージョン管理システムに比べ、<ul>
+<li>採用実績が多い。</li>
+<li>Windows対応が貧弱。</li>
+</ul>
+</li>
+</ul>
+<div class="section" id="id4">
+<h3>用語<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils">
+<dt>HEAD</dt>
+<dd>現在チェックアウトされているコミット、ブランチのこと。</dd>
+<dt>INDEX</dt>
+<dd>コミット対象のファイル、状態のこと。</dd>
+<dt>ワークツリー</dt>
+<dd>レポジトリの内容がディレクトリに展開されたもの。
+作業ファイルのこと。</dd>
+<dt>STASH</dt>
+<dd>一時的な保存領域ワークツリーの変更を一時的に保存する時に使う。</dd>
+</dl>
+</div>
+</div>
+<div class="section" id="id5">
+<h2>Gitの基本操作<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
+<p>Gitでの開発の基本ワークフローを以下に示します。</p>
+<p>Gitの各コマンドはgit subcmd という形式で表されます。</p>
+<p>Gitで開発するためにはまず、Gitレポジトリをローカルに作る必要があります。そのための方法として、git init(まっさらなレポジトリを作る)とgit clone(リモートのレポジトリをコピーする)があります。</p>
+<div class="highlight-python"><pre># リモートのレポジトリからソースコードをコピーしてくる
+git clone $REMOTEREPOSITORY
+
+# ソースコードを編集
+
+# ファイルをINDEXに上げる
+git add $FILENAME
+
+# ファイルをコミットする
+git commit -av
+
+# 編集している間に入ったリモートレポジトリの変更を反映する
+git pull --rebase
+
+# ローカルの変更をリモートレポジトリに反映する
+git push</pre>
+</div>
+</div>
+<div class="section" id="id6">
+<h2>実践Git<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h2>
+<p>よく使いそうなGitコマンドを紹介していくよ。</p>
+<div class="section" id="id7">
+<h3>新規ローカルレポジトリの作成<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><pre>cd $ProjectDir
+# レポジトリ作成
+git init
+# カレントディレクトリをINDEXに上げる
+git add .
+# 変更をコミット
+git commit -m 'initial commit'</pre>
+</div>
+</div>
+<div class="section" id="id8">
+<h3>リモートレポジトリからコピーしてくる<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><pre>git clone $REMOTEREPOSITORY</pre>
+</div>
+</div>
+<div class="section" id="index">
+<h3>ファイルをINDEXに上げる<a class="headerlink" href="#index" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><pre># ファイルを指定してINDEXに上げる
+git add $FILENAME
+
+# 対話的にINDEXに上げる箇所を選ぶ
+git add -p</pre>
+</div>
+</div>
+<div class="section" id="id9">
+<h3>変更をコミットする<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><pre># INDEXをコミットする
+git commit
+
+# ファイルを指定してコミットする
+git commit $FILENAME
+
+# コマンドラインでコミットログを指定する
+git commit -m 'ほげほげ refs #555'
+
+# 変更箇所を確認しつつコミットする
+git commit -v
+
+# Gitの管理対象ファイルをINDEXに上がっていないものも含めてコミットする
+git commit -a</pre>
+</div>
+</div>
+<div class="section" id="id10">
+<h3>変更を一時領域に保存する<a class="headerlink" href="#id10" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><pre># 変更を横によける
+git stash save
+
+# 横によけた変更をワークツリーに反映させる
+git stash pop
+
+# STASHをリスト表示する
+git stash list</pre>
+</div>
+</div>
+<div class="section" id="id11">
+<h3>変更履歴を見る<a class="headerlink" href="#id11" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><pre># INDEXに上がっていない、変更された管理対象ファイルを確認する
+git status
+
+# INDEXに上がっていない、変更された管理対象ファイルの差分を確認する
+git diff
+
+# INDEXに上がっているファイルも含め、変更された管理対象ファイルの差分を確認する
+git diff HEAD
+
+# 直前のコミットを見る
+git show
+
+# コミットログを見る
+git log
+
+# 変更履歴をdiff付きで見る
+git log -p
+
+# ブランチツリーを見る
+git log --graph
+
+# 変更がどのコミットで入ったのかを確認する
+git blame $FILENAME</pre>
+</div>
+</div>
+<div class="section" id="id12">
+<h3>リモートレポジトリの他人の変更を反映する<a class="headerlink" href="#id12" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><pre># 他人のコミットを
+git pull --rebase
+
+# 他人のコミットをマージする
+git pull</pre>
+</div>
+</div>
+<div class="section" id="id13">
+<h3>リモートレポジトリに自分の変更を反映する<a class="headerlink" href="#id13" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><pre># 自分のコミットをリモートレポジトリに反映する
+git pull --rebase
+git push</pre>
+</div>
+</div>
+<div class="section" id="id14">
+<h3>ブランチを操作する<a class="headerlink" href="#id14" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><pre># ブランチをリストアップする
+git branch
+
+# ブランチを作成する
+git branch $BRANCHNAME
+
+# ブランチを切り替える
+git checkout -b $BRANCHNAME
+
+# ブランチを作成してそのブランチに切り替える
+git checkout -b $BRANCHNAME
+
+# マージ済みのブランチを削除する
+git branch -d $BRANCHNAME
+
+# ブランチを強制削除する
+git branch -D $BRANCHNAME</pre>
+</div>
+</div>
+<div class="section" id="id15">
+<h3>コミットをやり直す<a class="headerlink" href="#id15" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><pre># 直前のコミットを取り消す
+git reset 'HEAD^'
+
+# 直前のコミットに変更を付け足す
+git commit --amend
+
+# 歴史を(コミット3件分)改竄する
+git commit -i 'HEAD~3'</pre>
+</div>
+</div>
+</div>
+<div class="section" id="id16">
+<h2>私とGit<a class="headerlink" href="#id16" title="Permalink to this headline">¶</a></h2>
+<p>私が仕事で使うテンプレ的なワークフローを紹介するよ。</p>
+<div class="section" id="id17">
+<h3>さて仕事を始めるか<a class="headerlink" href="#id17" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><pre>screen -rd $ProjectName
+cd $ProjectDir
+git checkout master
+git pull --rebase
+git checkout work
+git rebase master</pre>
+</div>
+</div>
+<div class="section" id="id18">
+<h3>新しい機能を実装するか<a class="headerlink" href="#id18" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><pre>git checkout master
+git pull --rebase
+git checkout -b topic/hoge-feature
+
+#... edit and test ...
+
+git checkout master
+git pull --rebase
+git checkout topic/hoge-feature
+git rebase master
+
+# if deploy new feature
+    git checkout master
+    git rebase topic/hoge-feature
+    git push
+    git branch -D topic/hoge-feature
+
+# else
+    git push origin topic/hoge-feature</pre>
+</div>
+</div>
+<div class="section" id="id19">
+<h3>バグ修正依頼がはいったぞ<a class="headerlink" href="#id19" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><pre>git checkout master
+git checkout -b fix/hoge-bug
+
+#... edit and pray ...
+
+git checkout master
+git pull --rebase
+git checkout fix/hoge-bug
+git rebase master
+git checkout master
+git rebase fix/hoge-bug
+git push
+git branch -D fix/hoge-bug</pre>
+</div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Git tutorial</a><ul>
+<li><a class="reference internal" href="#agenda">Agenda</a></li>
+<li><a class="reference internal" href="#id1">バージョン管理とは</a><ul>
+<li><a class="reference internal" href="#id2">なんでバージョン管理するの?</a></li>
+<li><a class="reference internal" href="#id3">集中型と分散型</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#git">Gitの概要</a><ul>
+<li><a class="reference internal" href="#id4">用語</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id5">Gitの基本操作</a></li>
+<li><a class="reference internal" href="#id6">実践Git</a><ul>
+<li><a class="reference internal" href="#id7">新規ローカルレポジトリの作成</a></li>
+<li><a class="reference internal" href="#id8">リモートレポジトリからコピーしてくる</a></li>
+<li><a class="reference internal" href="#index">ファイルをINDEXに上げる</a></li>
+<li><a class="reference internal" href="#id9">変更をコミットする</a></li>
+<li><a class="reference internal" href="#id10">変更を一時領域に保存する</a></li>
+<li><a class="reference internal" href="#id11">変更履歴を見る</a></li>
+<li><a class="reference internal" href="#id12">リモートレポジトリの他人の変更を反映する</a></li>
+<li><a class="reference internal" href="#id13">リモートレポジトリに自分の変更を反映する</a></li>
+<li><a class="reference internal" href="#id14">ブランチを操作する</a></li>
+<li><a class="reference internal" href="#id15">コミットをやり直す</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id16">私とGit</a><ul>
+<li><a class="reference internal" href="#id17">さて仕事を始めるか</a></li>
+<li><a class="reference internal" href="#id18">新しい機能を実装するか</a></li>
+<li><a class="reference internal" href="#id19">バグ修正依頼がはいったぞ</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="index.html"
+                        title="previous chapter">Unix関連の雑多な記事</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="watch.html"
+                        title="next chapter">Watch Your Server</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/unix/git.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="watch.html" title="Watch Your Server"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Unix関連の雑多な記事"
+             >previous</a> |</li>
+        <li><a href="../index.html">masasuzu docs 1.0 documentation</a> &raquo;</li>
+          <li><a href="index.html" >Unix関連の雑多な記事</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2012, masasuzu / SUZUKI Masashi.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.2.
+    </div>
+  </body>
+</html>

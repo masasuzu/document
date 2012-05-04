@@ -1,0 +1,218 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>実践ハイパフォーマンスMySQL 第9章 スケーラビリティと高可用性 &mdash; masasuzu docs 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="masasuzu docs 1.0 documentation" href="../../index.html" />
+    <link rel="up" title="独書メモ" href="../index.html" />
+    <link rel="next" title="ピアレビュー 第1章" href="../PeerReview/chapter01.html" />
+    <link rel="prev" title="アジャイルな見積もりと計画づくり 1章 計画の目的" href="../AgileEstimatingAndPlannnig/chapter01.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../PeerReview/chapter01.html" title="ピアレビュー 第1章"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../AgileEstimatingAndPlannnig/chapter01.html" title="アジャイルな見積もりと計画づくり 1章 計画の目的"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../index.html">masasuzu docs 1.0 documentation</a> &raquo;</li>
+          <li><a href="../index.html" accesskey="U">独書メモ</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="mysql-9">
+<h1>実践ハイパフォーマンスMySQL 第9章 スケーラビリティと高可用性<a class="headerlink" href="#mysql-9" title="Permalink to this headline">¶</a></h1>
+<p>SUZUKI Masashi / masasuzu / へなちょこえんじにあ</p>
+<div class="section" id="id1">
+<h2>用語<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<dt>パフォーマンス</dt>
+<dd>アプリケーションが特定の目標に達成する能力</dd>
+<dt>キャパシティ</dt>
+<dd>アプリケーションが処理できる総負荷</dd>
+<dt>スケーラビリティ</dt>
+<dd><p class="first">アプリケーションがサーバの増設に基づいて大きくなるときに
+パフォーマンスを維持する能力</p>
+<p class="last">パフォーマンスを低下させず必要に応じてキャパシティを追加できる能力</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="cont">
+<h2>用語 cont...<a class="headerlink" href="#cont" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<dt>可用性</dt>
+<dd>アプリケーションがリクエストに応答できる時間の割合</dd>
+<dt>フォルトトレランス</dt>
+<dd>アプリケーションとシステム全体が障碍に的確に対処する能力
+ダウンしても可能な限り多くの機能を提供できること</dd>
+</dl>
+</div>
+<div class="section" id="sns">
+<h2>SNSにおける一般的なメトリクス<a class="headerlink" href="#sns" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>データ量<ul>
+<li>日記とかコメントのような消せないデータが溜まっていく</li>
+</ul>
+</li>
+<li>ユーザ数<ul>
+<li>ユーザの関係数は( n * (n-1) ) / 2 が上限</li>
+</ul>
+</li>
+<li>ユーザアクティビティ</li>
+<li>関連するデータセットのサイズ</li>
+</ul>
+</div>
+<div class="section" id="mysql">
+<h2>MySQLのスケーリング<a class="headerlink" href="#mysql" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>垂直スケーリング (スケールアップ)</li>
+<li>水平スケーリング (スケールアウト)</li>
+<li>スケールバック<ul>
+<li>必要ないデータをパージ or アーカイブすること</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="id2">
+<h2>スケーラビリティの計画<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="id3">
+<h2>スケーリング前の時間稼ぎ<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>パフォーマンスの最適化</li>
+<li>高性能なハードウェアの購入</li>
+</ul>
+</div>
+<div class="section" id="id4">
+<h2>スケールアップ<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>資金の問題</li>
+<li>MySQLサーバ自体が多コア、多プロセスをうまく扱うことができない</li>
+<li>スケールアップはお勧めしない</li>
+</ul>
+</div>
+<div class="section" id="id5">
+<h2>スケールアウト<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>レプリケーションを通じた複数のサーバへのデータ分散<ul>
+<li>読み取りをスレーブに分散</li>
+</ul>
+</li>
+<li>パーティショニングによるワークロードの分散</li>
+<li>おすすめの構成はマスターマスター構成のマスタースレーブ構成</li>
+</ul>
+</div>
+<div class="section" id="id6">
+<h2>機能分割<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="id7">
+<h2>データシャーディング<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">実践ハイパフォーマンスMySQL 第9章 スケーラビリティと高可用性</a><ul>
+<li><a class="reference internal" href="#id1">用語</a></li>
+<li><a class="reference internal" href="#cont">用語 cont...</a></li>
+<li><a class="reference internal" href="#sns">SNSにおける一般的なメトリクス</a></li>
+<li><a class="reference internal" href="#mysql">MySQLのスケーリング</a></li>
+<li><a class="reference internal" href="#id2">スケーラビリティの計画</a></li>
+<li><a class="reference internal" href="#id3">スケーリング前の時間稼ぎ</a></li>
+<li><a class="reference internal" href="#id4">スケールアップ</a></li>
+<li><a class="reference internal" href="#id5">スケールアウト</a></li>
+<li><a class="reference internal" href="#id6">機能分割</a></li>
+<li><a class="reference internal" href="#id7">データシャーディング</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../AgileEstimatingAndPlannnig/chapter01.html"
+                        title="previous chapter">アジャイルな見積もりと計画づくり 1章 計画の目的</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../PeerReview/chapter01.html"
+                        title="next chapter">ピアレビュー 第1章</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../_sources/book/HighPerformanceMySQL/chapter09.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../PeerReview/chapter01.html" title="ピアレビュー 第1章"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../AgileEstimatingAndPlannnig/chapter01.html" title="アジャイルな見積もりと計画づくり 1章 計画の目的"
+             >previous</a> |</li>
+        <li><a href="../../index.html">masasuzu docs 1.0 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >独書メモ</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2012, masasuzu / SUZUKI Masashi.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.2.
+    </div>
+  </body>
+</html>
