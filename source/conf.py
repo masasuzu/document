@@ -219,7 +219,7 @@ man_pages = [
 # -- Options for Epub output ---------------------------------------------------
 
 # Bibliographic Dublin Core info.
-epub_title = u'Document about unix'
+epub_title = u'Document'
 epub_author = u'SUZUKI Masashi / masasuzu'
 epub_publisher = u'SUZUKI Masashi / masasuzu'
 epub_copyright = u'2011, SUZUKI Masashi / masasuzu'
