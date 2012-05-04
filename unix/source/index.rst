@@ -13,6 +13,7 @@ Contents:
 
    git
    watch
+   signal
 
 Indices and tables
 ==================
