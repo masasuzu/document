@@ -1,0 +1,424 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>L2ネットワークについて(VLANとかSTPとか) &mdash; masasuzu docs 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="masasuzu docs 1.0 documentation" href="../index.html" />
+    <link rel="up" title="ネットワークに関する雑多な記事" href="index.html" />
+    <link rel="next" title="ACL Access Control List" href="acl.html" />
+    <link rel="prev" title="ネットワークに関する雑多な記事" href="index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="acl.html" title="ACL Access Control List"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="ネットワークに関する雑多な記事"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">masasuzu docs 1.0 documentation</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">ネットワークに関する雑多な記事</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="l2-vlanstp">
+<h1>L2ネットワークについて(VLANとかSTPとか)<a class="headerlink" href="#l2-vlanstp" title="Permalink to this headline">¶</a></h1>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Version:</th><td class="field-body">1.0 of 2011/03/03</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Author:</th><td class="field-body">SUZUKI Masashi</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Mail:</th><td class="field-body"><a class="reference external" href="mailto:m15&#46;suzuki&#46;masashi&#37;&#52;&#48;gmail&#46;com">m15<span>&#46;</span>suzuki<span>&#46;</span>masashi<span>&#64;</span>gmail<span>&#46;</span>com</a></td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="agenda">
+<h2>Agenda<a class="headerlink" href="#agenda" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li>L2ネットワークについての軽い説明</li>
+<li>VLAN</li>
+<li>STP</li>
+</ol>
+</div>
+<div class="section" id="l2">
+<h2>L2ネットワーク<a class="headerlink" href="#l2" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Layer2<ul>
+<li>データリンク層 (OSI / TCP/IP)</li>
+</ul>
+</li>
+<li>MACアドレスを元にルーティング(スイッチング)を行う</li>
+<li>ブロードキャストフレームが届く範囲<ul>
+<li>ブロードキャストドメイン</li>
+<li>直接通信できる範囲</li>
+<li>いわゆるLAN</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="l2-cont">
+<h2>L2ネットワーク Cont..<a class="headerlink" href="#l2-cont" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><pre>+-----+   +-----+   +-----+
+| PC1 |---| SW  |---| PC2 |
++-----+   +-----+   +-----+
+             |
+          +-----+
+          | RT  |
+          +-----+
+             |
++-----+   +-----+   +-----+
+| PC3 |-- | SW  |-- | PC4 |
++-----+   +-----+   +-----+</pre>
+</div>
+</div>
+<div class="section" id="id1">
+<h2>スイッチング<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<p>PC1からPC3にフレームを送信する場合を考える。</p>
+<ol class="arabic simple">
+<li>PC1はSWに(ユニキャスト)フレームを転送する。</li>
+<li>SWは送信元PC1のMACアドレスを学習する。</li>
+<li>SWは受信したポート以外のポートへフレームを転送する(フラッディング)</li>
+<li>PC3がフレームを受信する。</li>
+</ol>
+<ul class="simple">
+<li>SWはPC1のMACアドレスを学習したのでこれ以降、PC1宛のフレームをフラッディングしない。</li>
+</ul>
+<div class="highlight-python"><pre>+-----+   +-----+   +-----+
+| PC1 |---| SW  |---| PC2 |
++-----+   +-----+   +-----+
+         /   |   \
++-----+ / +-----+ \ +-----+
+| PC3 |/  | PC4 |  \| PC5 |
++-----+   +-----+   +-----+</pre>
+</div>
+</div>
+<div class="section" id="id2">
+<h2>ブロードキャスト<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>MACアドレス FF-FF-FF-FF-FF-FF に送信する。</li>
+<li>L2ネットワーク内のすべてのノードにフレームを送信する。</li>
+<li>結構頻繁に発生する。<ul>
+<li>ARPリクエスト</li>
+<li>DHCP</li>
+</ul>
+</li>
+<li>ネットワーク設計上、ブロードキャストドメインはなるべく小さい方が良い。<ul>
+<li>ブロードキャストドメインを小さくするための対策としてのVLAN</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="vlan">
+<h2>VLAN<a class="headerlink" href="#vlan" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>物理的には1台のスイッチ内に仮想のスイッチが複数台存在するイメージ。</li>
+<li>物理ポートに縛られず、柔軟にL2ネットワークを構築できる。</li>
+<li>VLAN間で通信するにはL3(VLAN間)ルーティングが必要。</li>
+</ul>
+<div class="highlight-python"><pre>               +----------+
+               |    RT    |
+               +----------+
+                    |
++----------+   +----------+   +----------+
+| PC1(VL1) |---|   L2SW   |---| PC2(VL2) |
++----------+   +----------+   +----------+
+              /     |      \
++----------+ / +----------+ \ +----------+
+| PC3(VL1) |/  | PC4(VL1) |  \| PC5(VL2) |
++----------+   +----------+   +----------+</pre>
+</div>
+</div>
+<div class="section" id="id3">
+<h2>VLAN(用語)<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>スイッチポート<ul>
+<li>アクセスポート<ul>
+<li>1つのVLANのみ所属できるポート</li>
+<li>いわゆる普通のスイッチポート</li>
+</ul>
+</li>
+<li>トランクポート<ul>
+<li>複数のVLANに所属できるポート</li>
+<li>フレームについているVLANで所属VLANを判別する。<ul>
+<li>linuxだとaptitude install vlanでvlanタグを付けたフレームを転送できる機能がインストールできるよ!!</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>ルーテッドポート<ul>
+<li>IPアドレス割り振られているポート</li>
+<li>ルーターのインターフェースのイメージ</li>
+</ul>
+</li>
+<li>SVI<ul>
+<li>L3スイッチの内部インターフェース</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>VLANの形式<ul>
+<li>スタティックVLAN</li>
+<li>ダイナミックVLAN</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="id4">
+<h2>VLAN間ルーティング<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
+<p>ルータがトランクポートに非対応の場合、ルータのポートを2つ使う。</p>
+<div class="highlight-python"><pre>               +----------+
+               |    RT    |
+               +----------+
+          VL1 →  |    | ← VL2
++----------+   +----------+   +----------+
+| PC1(VL1) |---|   L2SW   |---| PC2(VL2) |
++----------+   +----------+   +----------+
+              /     |      \
++----------+ / +----------+ \ +----------+
+| PC3(VL1) |/  | PC4(VL1) |  \| PC5(VL2) |
++----------+   +----------+   +----------+</pre>
+</div>
+</div>
+<div class="section" id="vlan-cont">
+<h2>VLAN間ルーティング cont...<a class="headerlink" href="#vlan-cont" title="Permalink to this headline">¶</a></h2>
+<p>ルータがトランクポートに対応の場合、ルータのポートを1つにサブインターフェースを割り当てる。</p>
+<div class="highlight-python"><pre>               +----------+
+               |    RT    |
+               +----------+
+                     | ← トランクポート
++----------+   +----------+   +----------+
+| PC1(VL1) |---|   L2SW   |---| PC2(VL2) |
++----------+   +----------+   +----------+
+              /      |     \
++----------+ / +----------+ \ +----------+
+| PC3(VL1) |/  | PC4(VL1) |  \| PC5(VL2) |
++----------+   +----------+   +----------+</pre>
+</div>
+</div>
+<div class="section" id="id5">
+<h2>VLAN間ルーティング cont....<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
+<p>L3スイッチを使う場合、L3スイッチ内でルーティングをすることができる。</p>
+<div class="highlight-python"><pre>+----------+   +----------+   +----------+
+| PC1(VL1) |---|   L3SW   |---| PC2(VL2) |
++----------+   +----------+   +----------+
+              /     |      \
++----------+ / +----------+ \ +----------+
+| PC3(VL1) |/  | PC4(VL1) |  \| PC5(VL2) |
++----------+   +----------+   +----------+</pre>
+</div>
+</div>
+<div class="section" id="id6">
+<h2>ブロードキャストストーム<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h2>
+<p>PC1からにブロードキャストフレームを送信する場合を考える。</p>
+<ol class="arabic simple">
+<li>PC1からSW1に送信される。</li>
+<li>SW1からSW2とSW3にフラッディングされる。</li>
+<li>SW2からSW4とPC2にフラッディングされる。</li>
+<li>SW4からSW3とPC4にフラッディングされる。</li>
+<li>SW3からSW1とPC3にフラッディングされる。</li>
+<li>...以下繰り返し。</li>
+</ol>
+<div class="highlight-python"><pre>+-----+   +-----+   +-----+   +-----+
+| PC1 |---| SW1 |---| SW2 |---| PC2 |
++-----+   +-----+   +-----+   +-----+
+             |         |
++-----+   +-----+   +-----+   +-----+
+| PC3 |---| SW3 |---| SW4 |---| PC4 |
++-----+   +-----+   +-----+   +-----+</pre>
+</div>
+</div>
+<div class="section" id="stp">
+<h2>STP<a class="headerlink" href="#stp" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Spanning Tree Protocol</li>
+<li>ブロードキャストストームを防ぐための技術</li>
+<li>ループにならないようあらかじめ計算されたポートをブロック状態にしておく。<ul>
+<li>L2ネットワークが論理上ツリー構造になる。</li>
+</ul>
+</li>
+<li>障碍時に自動的に有効となる。(冗長性)</li>
+<li>VLANごとにツリー構成を変えることができる。(負荷分散)</li>
+</ul>
+</div>
+<div class="section" id="id7">
+<h2>STP(用語)<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>BPDU<ul>
+<li>STPの情報をやりとりするパケット</li>
+</ul>
+</li>
+<li>ルートブリッジ<ul>
+<li>ブリッジIDが1番小さいスイッチ</li>
+</ul>
+</li>
+<li>ルートポート RP<ul>
+<li>ルートブリッジ以外のスイッチの内一番、ルートブリッジに近いポート。ルートブリッジからのBPDUを受信するポート</li>
+</ul>
+</li>
+<li>指定ポート DP<ul>
+<li>一番ルートブリッジに近いポート。ルートブリッジからのBPDUを送信する。</li>
+</ul>
+</li>
+<li>ブロックポート(非指定ポート) NDP<ul>
+<li>ルートポート、指定ポートに選ばれなかったポート。データの送受信ができない。</li>
+</ul>
+</li>
+<li>ブリッジID<ul>
+<li>プライオリティ + MACアドレスの値</li>
+</ul>
+</li>
+<li>近い遠いの計算はコスト値で決まる。</li>
+</ul>
+</div>
+<div class="section" id="id8">
+<h2>STPのコストの優先順位<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li>ルートブリッジへのコストの累計で比較</li>
+<li>送信元ブリッジIDで比較</li>
+<li>送信元ポートIDで比較</li>
+</ol>
+</div>
+<div class="section" id="id9">
+<h2>STP 構成<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>SW1: ブリッジID 1</li>
+<li>SW2: ブリッジID 2</li>
+<li>SW3: ブリッジID 3</li>
+<li>SW4: ブリッジID 4</li>
+</ul>
+<div class="highlight-python"><pre>+---------+ DP   RP +---------+
+|   SW1   |---------|   SW2   |
++---------+         +---------+
+     | DP                | DP
+     |                   |
+     | RP                | RP
++---------+ DP  NDP +---------+
+|   SW3   |---------|   SW4   |
++---------+         +---------+</pre>
+</div>
+</div>
+<div class="section" id="id10">
+<h2>STP その他細かいトピック<a class="headerlink" href="#id10" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>STPを高速化したRSTP</li>
+<li>STPをグループ化したMST</li>
+<li>VLANごとのSTPであるPVST</li>
+<li>STP以外のL2の冗長化技術であるリンクアグリケーション</li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">L2ネットワークについて(VLANとかSTPとか)</a><ul>
+<li><a class="reference internal" href="#agenda">Agenda</a></li>
+<li><a class="reference internal" href="#l2">L2ネットワーク</a></li>
+<li><a class="reference internal" href="#l2-cont">L2ネットワーク Cont..</a></li>
+<li><a class="reference internal" href="#id1">スイッチング</a></li>
+<li><a class="reference internal" href="#id2">ブロードキャスト</a></li>
+<li><a class="reference internal" href="#vlan">VLAN</a></li>
+<li><a class="reference internal" href="#id3">VLAN(用語)</a></li>
+<li><a class="reference internal" href="#id4">VLAN間ルーティング</a></li>
+<li><a class="reference internal" href="#vlan-cont">VLAN間ルーティング cont...</a></li>
+<li><a class="reference internal" href="#id5">VLAN間ルーティング cont....</a></li>
+<li><a class="reference internal" href="#id6">ブロードキャストストーム</a></li>
+<li><a class="reference internal" href="#stp">STP</a></li>
+<li><a class="reference internal" href="#id7">STP(用語)</a></li>
+<li><a class="reference internal" href="#id8">STPのコストの優先順位</a></li>
+<li><a class="reference internal" href="#id9">STP 構成</a></li>
+<li><a class="reference internal" href="#id10">STP その他細かいトピック</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="index.html"
+                        title="previous chapter">ネットワークに関する雑多な記事</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="acl.html"
+                        title="next chapter">ACL Access Control List</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/network/vlan_stp.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="acl.html" title="ACL Access Control List"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="ネットワークに関する雑多な記事"
+             >previous</a> |</li>
+        <li><a href="../index.html">masasuzu docs 1.0 documentation</a> &raquo;</li>
+          <li><a href="index.html" >ネットワークに関する雑多な記事</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2012, masasuzu / SUZUKI Masashi.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.2.
+    </div>
+  </body>
+</html>

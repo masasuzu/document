@@ -1,0 +1,262 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>ピアレビュー 第6章 &mdash; masasuzu docs 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="masasuzu docs 1.0 documentation" href="../../index.html" />
+    <link rel="up" title="ピアレビューのメモ書き" href="index.html" />
+    <link rel="next" title="ピアレビュー 第7章" href="chapter07.html" />
+    <link rel="prev" title="ピアレビュー 第5章" href="chapter05.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="chapter07.html" title="ピアレビュー 第7章"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="chapter05.html" title="ピアレビュー 第5章"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../index.html">masasuzu docs 1.0 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >独書メモ</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">ピアレビューのメモ書き</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="id1">
+<h1>ピアレビュー 第6章<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="id2">
+<h2>作業成果物を調べる - 概要説明準備<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id3">
+<h3>6.1 概要説明<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>インスペクタがすでに初期成果物についてよく知っている場合は省略可能</li>
+<li>初期成果物の背景と目的を理解し、共有することを目的とする</li>
+<li>30分-60分</li>
+<li>作成者が主導</li>
+<li>以下の事項を扱う<ul>
+<li>プログラムの動作環境</li>
+<li>入力および出力</li>
+<li>モジュールの事前条件、事後条件</li>
+<li>例外処理の戦略</li>
+<li>重要なデータ構造</li>
+<li>ユーザインタフェースおよびソフトウェア/ハードウェアコンポーネントとのインタフェース</li>
+<li>利用のシナリオ</li>
+<li>アーキテクチャに関する説明</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="id4">
+<h3>6.2 準備<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>チェックリストおよび分析技法を用いて作業成果物の欠陥候補が無いかを調べる</li>
+<li>欠陥候補や課題を各自のメモもしくは課題ログに記録する</li>
+<li>スペルミスや書式の問題のような小さな項目は誤字誤植一覧表に記録する<ul>
+<li>通常、誤字誤植は欠陥には数えられない</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="id5">
+<h3>6.3 準備の方法<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>疑問点はとにかくメモする方法</li>
+<li>観点ごとに重複無くインスペクタを割り当てる方法<ul>
+<li>各人がしっかりと準備をする必要がある</li>
+</ul>
+</li>
+<li>毎回異なる観点ごとに焦点を当て数回通読する方法<ul>
+<li>工数がかかる</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="id6">
+<h3>6.3.1 欠陥チェックリスト<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>ソフトウェア作業成果物に見られる欠陥の典型例<ul>
+<li>あらかじめどのような点に気をつけて作成すればいいのかがわかる</li>
+<li>コンパイラや静的解析ツールによって発見できる欠陥は記載しない</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="id7">
+<h3>6.3.2 ルールセット<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>チェックリストを補完、代替するもの<ul>
+<li>命名規則</li>
+<li>書式等</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="id8">
+<h3>6.3.3 その他の分析技法<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>作業成果物を単に通読するよりも適切な分析技法を選択すべき</li>
+</ul>
+</div>
+<div class="section" id="id9">
+<h3>6.3.3.1 要求仕様書<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>漠然性と曖昧性のチェック<ul>
+<li>PBR(Perspective-based reading)<ul>
+<li>個々のインスペクタに様々な立場の観点を与える</li>
+<li>例) 顧客、デザイナ、システムテスト担当者</li>
+</ul>
+</li>
+<li>シナリオの利用 Porter et al.</li>
+</ul>
+</li>
+<li>要求の欠落のチェック<ul>
+<li>特定された全てのユーザ層から要求を受け取ったどうかを確認する</li>
+<li>同種の製品および競合製品を調査し、追加すべき機能が無いか確認する</li>
+<li>品質属性、製品目標、制約条件、外部インタフェース要求など非機能要求が仕様化されているか確認する</li>
+<li>一定のパターンになる類似の要求を表にまとめて、重複や見落としを防ぐ</li>
+<li>全てのデータ項目についてソースと利用先を記述する 等</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="id10">
+<h3>6.3.3.2 ユーザインタフェース仕様<a class="headerlink" href="#id10" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>ヒューリスティック評価 Jakob Nielsen<ul>
+<li>既知の経験則に照らしてユーザインタフェースを評価する</li>
+</ul>
+</li>
+<li>コラボレーティブユーザビリティインスペクション Constntine and Lockwood</li>
+</ul>
+</div>
+<div class="section" id="id11">
+<h3>6.3.3.3 設計書<a class="headerlink" href="#id11" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>シナリオ、アンケート、チェックリストなどに基づくレビュー Bass、Clements, and Katzman</li>
+<li>アクティブデザインレビュー Parnas and Weiss<ul>
+<li>参加者はそれぞれ異なったチェックリストを使用する</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="id12">
+<h3>6.3.3.4 ソースコード<a class="headerlink" href="#id12" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>アクティブデザインレビュー</li>
+<li>デシジョンテーブル</li>
+<li>デシジョンツリー</li>
+<li>制御フローグラフ</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">ピアレビュー 第6章</a><ul>
+<li><a class="reference internal" href="#id2">作業成果物を調べる - 概要説明準備</a><ul>
+<li><a class="reference internal" href="#id3">6.1 概要説明</a></li>
+<li><a class="reference internal" href="#id4">6.2 準備</a></li>
+<li><a class="reference internal" href="#id5">6.3 準備の方法</a></li>
+<li><a class="reference internal" href="#id6">6.3.1 欠陥チェックリスト</a></li>
+<li><a class="reference internal" href="#id7">6.3.2 ルールセット</a></li>
+<li><a class="reference internal" href="#id8">6.3.3 その他の分析技法</a></li>
+<li><a class="reference internal" href="#id9">6.3.3.1 要求仕様書</a></li>
+<li><a class="reference internal" href="#id10">6.3.3.2 ユーザインタフェース仕様</a></li>
+<li><a class="reference internal" href="#id11">6.3.3.3 設計書</a></li>
+<li><a class="reference internal" href="#id12">6.3.3.4 ソースコード</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="chapter05.html"
+                        title="previous chapter">ピアレビュー 第5章</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="chapter07.html"
+                        title="next chapter">ピアレビュー 第7章</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../_sources/book/PeerReview/chapter06.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="chapter07.html" title="ピアレビュー 第7章"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="chapter05.html" title="ピアレビュー 第5章"
+             >previous</a> |</li>
+        <li><a href="../../index.html">masasuzu docs 1.0 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >独書メモ</a> &raquo;</li>
+          <li><a href="index.html" >ピアレビューのメモ書き</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2012, masasuzu / SUZUKI Masashi.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.2.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,244 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>ピアレビュー第3章 &mdash; masasuzu docs 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="masasuzu docs 1.0 documentation" href="../../index.html" />
+    <link rel="up" title="ピアレビューのメモ書き" href="index.html" />
+    <link rel="next" title="ピアレビュー 第4章" href="chapter04.html" />
+    <link rel="prev" title="ピアレビュー第2章" href="chapter02.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="chapter04.html" title="ピアレビュー 第4章"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="chapter02.html" title="ピアレビュー第2章"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../index.html">masasuzu docs 1.0 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >独書メモ</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">ピアレビューのメモ書き</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="id1">
+<h1>ピアレビュー第3章<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="id2">
+<h2>公式なピアレビュー、非公式なピアレビュー<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id3">
+<h3>3.1 公式な分布範囲<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<p>ピアレビューの分類</p>
+<ol class="arabic simple">
+<li>インスペクション (最も公式)</li>
+<li>チームレビュー</li>
+<li>ウォークスルー</li>
+<li>ペアプログラミング</li>
+<li>ピアデスクチェック、パスアラウンド</li>
+<li>アドホックレビュー (最も非公式)</li>
+</ol>
+<p>ピアレビューは以下の5つのアクティビティの組み合わせ</p>
+<ol class="arabic simple">
+<li>計画</li>
+<li>作業成果物の各自の準備</li>
+<li>レビューミーティング</li>
+<li>エラーの修正</li>
+<li>修正の検証</li>
+</ol>
+</div>
+<div class="section" id="id4">
+<h3>3.1.1 インスペクション<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>最も体系的で厳格な種類のピアレビュー<ul>
+<li>作成者以外がミーティングを主導(モデレータ)</li>
+<li>問題は記録(書記)</li>
+</ul>
+</li>
+<li>最も工数がかかるが最も効果が高いピアレビュー</li>
+</ul>
+<p>インスペクションの段階</p>
+<ol class="arabic simple">
+<li>計画</li>
+<li>概要説明</li>
+<li>準備</li>
+<li>ミーティング</li>
+<li>修正</li>
+<li>フォローアップ</li>
+<li>原因分析</li>
+</ol>
+</div>
+<div class="section" id="id5">
+<h3>3.1.2 チームレビュー<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>軽インスペクション<ul>
+<li>一般的に言われるレビュー</li>
+<li>作成者がモデレータを兼ねてもよい</li>
+</ul>
+</li>
+<li>解決案の議論および技術的な処理方法に関するコンセンサス形成に充てられる場合もある</li>
+</ul>
+</div>
+<div class="section" id="id6">
+<h3>3.1.3 ウォークスルー<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>作成者がミーティングを主導<ul>
+<li>作成者の関心が少ない部分に欠陥が残る場合もある</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="id7">
+<h3>3.1.4 ペアプログラミング<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>XPの手法<ul>
+<li>2人で1台のマシンを共有し、1つのプログラムを作成する</li>
+<li>1人が作成者、他方がそれに対するアドバイザとなる</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="id8">
+<h3>3.1.5 ピアデスクチェック<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>机上チェックのこと<ul>
+<li>作成者もしくは1人のレビュアによるチェック</li>
+<li>一番安価なレビュー手法</li>
+<li>レビュアの技術と経験に完全依存</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="id9">
+<h3>3.1.6 パスアラウンド<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>回覧形式<ul>
+<li>手軽</li>
+<li>レビューミーティングによる相乗効果がない</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="id10">
+<h3>3.1.7 アドホックレビュー<a class="headerlink" href="#id10" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>形式が決まっていない</li>
+</ul>
+</div>
+<div class="section" id="id11">
+<h3>3.2 レビュー手法を選ぶ<a class="headerlink" href="#id11" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>リスクと目標にあわせて選ぶ</li>
+<li>インスペクションと非公式レビューを組み合わせると効果が高い</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">ピアレビュー第3章</a><ul>
+<li><a class="reference internal" href="#id2">公式なピアレビュー、非公式なピアレビュー</a><ul>
+<li><a class="reference internal" href="#id3">3.1 公式な分布範囲</a></li>
+<li><a class="reference internal" href="#id4">3.1.1 インスペクション</a></li>
+<li><a class="reference internal" href="#id5">3.1.2 チームレビュー</a></li>
+<li><a class="reference internal" href="#id6">3.1.3 ウォークスルー</a></li>
+<li><a class="reference internal" href="#id7">3.1.4 ペアプログラミング</a></li>
+<li><a class="reference internal" href="#id8">3.1.5 ピアデスクチェック</a></li>
+<li><a class="reference internal" href="#id9">3.1.6 パスアラウンド</a></li>
+<li><a class="reference internal" href="#id10">3.1.7 アドホックレビュー</a></li>
+<li><a class="reference internal" href="#id11">3.2 レビュー手法を選ぶ</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="chapter02.html"
+                        title="previous chapter">ピアレビュー第2章</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="chapter04.html"
+                        title="next chapter">ピアレビュー 第4章</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../_sources/book/PeerReview/chapter03.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="chapter04.html" title="ピアレビュー 第4章"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="chapter02.html" title="ピアレビュー第2章"
+             >previous</a> |</li>
+        <li><a href="../../index.html">masasuzu docs 1.0 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >独書メモ</a> &raquo;</li>
+          <li><a href="index.html" >ピアレビューのメモ書き</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2012, masasuzu / SUZUKI Masashi.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.2.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,227 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>ピアレビュー 第9章 &mdash; masasuzu docs 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="masasuzu docs 1.0 documentation" href="../../index.html" />
+    <link rel="up" title="ピアレビューのメモ書き" href="index.html" />
+    <link rel="next" title="ピアレビュー 第10章" href="chapter10.html" />
+    <link rel="prev" title="ピアレビュー 第8章" href="chapter08.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="chapter10.html" title="ピアレビュー 第10章"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="chapter08.html" title="ピアレビュー 第8章"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../index.html">masasuzu docs 1.0 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >独書メモ</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">ピアレビューのメモ書き</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="id1">
+<h1>ピアレビュー 第9章<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="id2">
+<h2>インスペクションデータを分析する<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id3">
+<h3>9.1 なぜデータを集めるのか<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p class="first">経験や勘に頼るのではなく定量的なデータに基づく判断ができるようになる</p>
+</li>
+<li><p class="first">GQM (Goal Question Metrics) 法</p>
+<blockquote>
+<div><ul class="simple">
+<li>適切なメトリクスを選択するための方法</li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</div>
+<div class="section" id="id4">
+<h3>9.2 測定における注意<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>メトリクスは公正であること<ul>
+<li>メトリクスに対して賞罰を与えないこと<ul>
+<li>測定機能障害</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>断定的判断を避けること</li>
+</ul>
+</div>
+<div class="section" id="id5">
+<h3>9.3 基本的なデータ項目とメトリクス<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>基本データ<ul>
+<li>サイズ</li>
+<li>時間</li>
+<li>工数</li>
+<li>品質</li>
+<li>インスペクションサマリレポートと課題ログに記録されている</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="id6">
+<h3>9.4 インスペクションのデータベース<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>インスペクションデータを格納するレポジトリ</li>
+<li>一連のインスペクションに対してメトリクスの平均と傾向を監視するツールが必要</li>
+</ul>
+</div>
+<div class="section" id="id7">
+<h3>9.5 データ分析<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>散布図を用いてメトリクス間の相関を見ることができる</li>
+<li>統計的プロセス管理を用いてインスペクションパラメータを監視できるようになる<ul>
+<li>プロセスの個々の実績が期待される管理限界の外側に外れたケースを特定するための手法</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="id8">
+<h3>9.6 インスペクションの影響を測定する<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="id9">
+<h3>9.6.1 有効性<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h3>
+<p>インスペクションで見つかった欠陥 / 後工程で見つかった欠陥 * 100 == インスペクションの有効性</p>
+<ul class="simple">
+<li>有効性がわかれば、インスペクション後に文書にどれくらい欠陥が残っているか見積もることができる・</li>
+</ul>
+</div>
+<div class="section" id="id10">
+<h3>9.6.2 効率<a class="headerlink" href="#id10" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>インスペクションの効率が上がれば上がるほど、工数1時間あたりに発見できる欠陥の数が増える</li>
+</ul>
+</div>
+<div class="section" id="id11">
+<h3>9.6.3 費用対効果<a class="headerlink" href="#id11" title="Permalink to this headline">¶</a></h3>
+<p>正味節約コスト / 検出コスト == 費用対効果</p>
+<ul class="simple">
+<li>正味節約コスト<ul>
+<li>未来のある時点で欠陥を修正するのにかかる推定コスト - 実際に欠陥を修正するのにかかったコスト</li>
+</ul>
+</li>
+<li>検出コスト<ul>
+<li>インスペクションに実際にかかったコスト</li>
+</ul>
+</li>
+<li>費用対効果が1をわずかに上回る場合にはインスペクションを実施する価値がある</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">ピアレビュー 第9章</a><ul>
+<li><a class="reference internal" href="#id2">インスペクションデータを分析する</a><ul>
+<li><a class="reference internal" href="#id3">9.1 なぜデータを集めるのか</a></li>
+<li><a class="reference internal" href="#id4">9.2 測定における注意</a></li>
+<li><a class="reference internal" href="#id5">9.3 基本的なデータ項目とメトリクス</a></li>
+<li><a class="reference internal" href="#id6">9.4 インスペクションのデータベース</a></li>
+<li><a class="reference internal" href="#id7">9.5 データ分析</a></li>
+<li><a class="reference internal" href="#id8">9.6 インスペクションの影響を測定する</a></li>
+<li><a class="reference internal" href="#id9">9.6.1 有効性</a></li>
+<li><a class="reference internal" href="#id10">9.6.2 効率</a></li>
+<li><a class="reference internal" href="#id11">9.6.3 費用対効果</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="chapter08.html"
+                        title="previous chapter">ピアレビュー 第8章</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="chapter10.html"
+                        title="next chapter">ピアレビュー 第10章</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../_sources/book/PeerReview/chapter09.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="chapter10.html" title="ピアレビュー 第10章"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="chapter08.html" title="ピアレビュー 第8章"
+             >previous</a> |</li>
+        <li><a href="../../index.html">masasuzu docs 1.0 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >独書メモ</a> &raquo;</li>
+          <li><a href="index.html" >ピアレビューのメモ書き</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2012, masasuzu / SUZUKI Masashi.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.2.
+    </div>
+  </body>
+</html>

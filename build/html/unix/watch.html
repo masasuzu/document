@@ -1,0 +1,267 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Watch Your Server &mdash; masasuzu docs 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="masasuzu docs 1.0 documentation" href="../index.html" />
+    <link rel="up" title="Unix関連の雑多な記事" href="index.html" />
+    <link rel="next" title="signalについて" href="signal.html" />
+    <link rel="prev" title="Git tutorial" href="git.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="signal.html" title="signalについて"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="git.html" title="Git tutorial"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">masasuzu docs 1.0 documentation</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Unix関連の雑多な記事</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="watch-your-server">
+<h1>Watch Your Server<a class="headerlink" href="#watch-your-server" title="Permalink to this headline">¶</a></h1>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Version:</th><td class="field-body">1.0 of 2012/04/06</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Author:</th><td class="field-body">SUZUKI Masashi / masasuzu</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Mail:</th><td class="field-body"><a class="reference external" href="mailto:m15&#46;suzuki&#46;masashi&#37;&#52;&#48;gmail&#46;com">m15<span>&#46;</span>suzuki<span>&#46;</span>masashi<span>&#64;</span>gmail<span>&#46;</span>com</a></td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="id1">
+<h2>負荷<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<p>負荷は主に2つに分類されます。</p>
+<ul class="simple">
+<li>CPU負荷</li>
+<li>I/O負荷</li>
+</ul>
+<p>CPU負荷が高いサーバをCUPバウンドなサーバ、I/O負荷が高いサーバをI/Oバウンドなサーバと言ったりします。前者の例としてはDBサーバ、後者の例としてはアプリケーションサーバがあります。</p>
+</div>
+<div class="section" id="id2">
+<h2>ロードアベレージ<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<p>サーバの負荷を表す指標として ロードアベレージがあります。LAと略することもあります。uptimeコマンドを叩くとロードアベレージを取得することができます。
+ロードアベレージの数値は単位時間あたりの平均待ちタスクの数を表します。一般的に数値が高いほど負荷が高いと言えます。</p>
+<div class="highlight-python"><pre>% uptime
+13:58:02 up 19 days, 19:23, 14 users,  load average: 0.07, 0.04, 0.06</pre>
+</div>
+<p>左側から順に、現在の時間、起動からどれくらい時間が経っているか、ログインしているユーザ数(w | wc -c 相当) 、1分間、5分間、15分間のロードアベレージ</p>
+</div>
+<div class="section" id="id3">
+<h2>プロセスの状態遷移<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="29%" />
+<col width="71%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">状態</th>
+<th class="head">説明</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>TASK_RUNNING</td>
+<td>タスクが実行可能な状態</td>
+</tr>
+<tr class="row-odd"><td>TASK_INTERRUPTIBLE</td>
+<td>割り込み可能な待ち状態。入力待ちなど</td>
+</tr>
+<tr class="row-even"><td>TASK_UNINTERRUPTIBLE</td>
+<td>割り込み不可能な待ち状態。ディスクの入出力待ちなど</td>
+</tr>
+<tr class="row-odd"><td>TASK_STOPPED</td>
+<td>サスペンド状態</td>
+</tr>
+<tr class="row-even"><td>TASK_ZOMBIE</td>
+<td>ゾンビ状態</td>
+</tr>
+</tbody>
+</table>
+<ul class="simple">
+<li>SEE ALSO; <a class="reference external" href="http://sourceforge.jp/projects/linux-kernel-docs/wiki/internal22-6-%E3%83%97%E3%83%AD%E3%82%BB%E3%82%B9%E3%81%AE%E7%8A%B6%E6%85%8B%E9%81%B7%E7%A7%BB">http://sourceforge.jp/projects/linux-kernel-docs/wiki/internal22-6-%E3%83%97%E3%83%AD%E3%82%BB%E3%82%B9%E3%81%AE%E7%8A%B6%E6%85%8B%E9%81%B7%E7%A7%BB</a></li>
+</ul>
+<div class="highlight-python"><pre>プロセスの状態遷移図(簡略)
+
+                実行待ち            scheduling         実行中
+---------&gt; TASK_RUNNING(READY)  ------------------&gt; TASK_RUNNING
+generate           ^            &lt;-----------------      |
+                   |                preempt             |
+                   |                                    |
+                   |          イベント待ち              |
+                   +----- TASK_INTERRUPTIBLE   &lt;--------+
+                          TASK_UNINTERRUPTIBLE
+                   wake_up                          sleep_on
+                   interruptiple_wake_on            interruptiple_sleep_on</pre>
+</div>
+<p>プロセスの状態のうちロードアベレージに換算されるのは、TASK_RUNNINGとTASK_UNINTERRUPTIBLEのみです。
+つまり、CPUの実行権限が与えられるのを待っているプロセスとディスクI/Oが完了するのを待っているプロセスのみとなります。
+ロードアベレージが高い場合、どちらに起因するのかを考えなければなりません。</p>
+<div class="section" id="ps">
+<h3>ps<a class="headerlink" href="#ps" title="Permalink to this headline">¶</a></h3>
+<p>ちなむとpsコマンドでプロセスの実行状態を参照することができます。</p>
+<div class="highlight-python"><pre>PROCESS STATE CODES
+       Here are the different values that the s, stat and state output specifiers (header "STAT" or "S") will display to describe the state of a process.
+       D    Uninterruptible sleep (usually IO)
+       R    Running or runnable (on run queue)
+       S    Interruptible sleep (waiting for an event to complete)
+       T    Stopped, either by a job control signal or because it is being traced.
+       W    paging (not valid since the 2.6.xx kernel)
+       X    dead (should never be seen)
+       Z    Defunct ("zombie") process, terminated but not reaped by its parent.
+
+       For BSD formats and when the stat keyword is used, additional characters may be displayed:
+       &lt;    high-priority (not nice to other users)
+       N    low-priority (nice to other users)
+       L    has pages locked into memory (for real-time and custom IO)
+       s    is a session leader
+       l    is multi-threaded (using CLONE_THREAD, like NPTL pthreads do)
+       +    is in the foreground process group</pre>
+</div>
+</div>
+</div>
+<div class="section" id="id4">
+<h2>メモリ<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
+<p>物理メモリ、仮想メモリとかページキャッシュの話</p>
+</div>
+<div class="section" id="id5">
+<h2>ps<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="top">
+<h2>top<a class="headerlink" href="#top" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="mpstat">
+<h2>mpstat<a class="headerlink" href="#mpstat" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="iostat">
+<h2>iostat<a class="headerlink" href="#iostat" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="vmstat">
+<h2>vmstat<a class="headerlink" href="#vmstat" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="netstat">
+<h2>netstat<a class="headerlink" href="#netstat" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="sar">
+<h2>sar<a class="headerlink" href="#sar" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="dstat">
+<h2>dstat<a class="headerlink" href="#dstat" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Watch Your Server</a><ul>
+<li><a class="reference internal" href="#id1">負荷</a></li>
+<li><a class="reference internal" href="#id2">ロードアベレージ</a></li>
+<li><a class="reference internal" href="#id3">プロセスの状態遷移</a><ul>
+<li><a class="reference internal" href="#ps">ps</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id4">メモリ</a></li>
+<li><a class="reference internal" href="#id5">ps</a></li>
+<li><a class="reference internal" href="#top">top</a></li>
+<li><a class="reference internal" href="#mpstat">mpstat</a></li>
+<li><a class="reference internal" href="#iostat">iostat</a></li>
+<li><a class="reference internal" href="#vmstat">vmstat</a></li>
+<li><a class="reference internal" href="#netstat">netstat</a></li>
+<li><a class="reference internal" href="#sar">sar</a></li>
+<li><a class="reference internal" href="#dstat">dstat</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="git.html"
+                        title="previous chapter">Git tutorial</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="signal.html"
+                        title="next chapter">signalについて</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/unix/watch.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="signal.html" title="signalについて"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="git.html" title="Git tutorial"
+             >previous</a> |</li>
+        <li><a href="../index.html">masasuzu docs 1.0 documentation</a> &raquo;</li>
+          <li><a href="index.html" >Unix関連の雑多な記事</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2012, masasuzu / SUZUKI Masashi.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.2.
+    </div>
+  </body>
+</html>
