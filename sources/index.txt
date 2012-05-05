@@ -4,11 +4,8 @@ masasuzu docs
 Contents:
 
 .. toctree::
-   :maxdepth: 1
+   :maxdepth: 2
+   :glob:
 
-   unix/index
-   book/index
-   study/index
-   test/index
-   network/index
+   */index
 

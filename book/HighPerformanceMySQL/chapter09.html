@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>実践ハイパフォーマンスMySQL 第9章 スケーラビリティと高可用性 &mdash; masasuzu docs 1.0 documentation</title>
+    <title>第9章 スケーラビリティと高可用性 &mdash; masasuzu docs 1.0 documentation</title>
     
     <link rel="stylesheet" href="../../static/default.css" type="text/css" />
     <link rel="stylesheet" href="../../static/pygments.css" type="text/css" />
@@ -26,9 +26,9 @@
     <script type="text/javascript" src="../../static/underscore.js"></script>
     <script type="text/javascript" src="../../static/doctools.js"></script>
     <link rel="top" title="masasuzu docs 1.0 documentation" href="../../index.html" />
-    <link rel="up" title="独書メモ" href="../index.html" />
-    <link rel="next" title="ピアレビュー 第1章" href="../PeerReview/chapter01.html" />
-    <link rel="prev" title="アジャイルな見積もりと計画づくり 1章 計画の目的" href="../AgileEstimatingAndPlannnig/chapter01.html" /> 
+    <link rel="up" title="実践ハイパフォーマンスMySQL 第2版" href="index.html" />
+    <link rel="next" title="ピアレビューのメモ書き" href="../PeerReview/index.html" />
+    <link rel="prev" title="実践ハイパフォーマンスMySQL 第2版" href="index.html" /> 
   </head>
   <body>
     <div class="related">
@@ -38,13 +38,14 @@
           <a href="../../genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="../PeerReview/chapter01.html" title="ピアレビュー 第1章"
+          <a href="../PeerReview/index.html" title="ピアレビューのメモ書き"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="../AgileEstimatingAndPlannnig/chapter01.html" title="アジャイルな見積もりと計画づくり 1章 計画の目的"
+          <a href="index.html" title="実践ハイパフォーマンスMySQL 第2版"
              accesskey="P">previous</a> |</li>
         <li><a href="../../index.html">masasuzu docs 1.0 documentation</a> &raquo;</li>
-          <li><a href="../index.html" accesskey="U">独書メモ</a> &raquo;</li> 
+          <li><a href="../index.html" >独書メモ</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">実践ハイパフォーマンスMySQL 第2版</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -53,11 +54,11 @@
         <div class="bodywrapper">
           <div class="body">
             
-  <div class="section" id="mysql-9">
-<h1>実践ハイパフォーマンスMySQL 第9章 スケーラビリティと高可用性<a class="headerlink" href="#mysql-9" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="id1">
+<h1>第9章 スケーラビリティと高可用性<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
 <p>SUZUKI Masashi / masasuzu / へなちょこえんじにあ</p>
-<div class="section" id="id1">
-<h2>用語<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id2">
+<h2>用語<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
 <dl class="docutils">
 <dt>パフォーマンス</dt>
 <dd>アプリケーションが特定の目標に達成する能力</dd>
@@ -68,11 +69,6 @@
 パフォーマンスを維持する能力</p>
 <p class="last">パフォーマンスを低下させず必要に応じてキャパシティを追加できる能力</p>
 </dd>
-</dl>
-</div>
-<div class="section" id="cont">
-<h2>用語 cont...<a class="headerlink" href="#cont" title="Permalink to this headline">¶</a></h2>
-<dl class="docutils">
 <dt>可用性</dt>
 <dd>アプリケーションがリクエストに応答できる時間の割合</dd>
 <dt>フォルトトレランス</dt>
@@ -106,26 +102,26 @@
 </li>
 </ul>
 </div>
-<div class="section" id="id2">
-<h2>スケーラビリティの計画<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
-</div>
 <div class="section" id="id3">
-<h2>スケーリング前の時間稼ぎ<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
+<h2>スケーラビリティの計画<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="id4">
+<h2>スケーリング前の時間稼ぎ<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li>パフォーマンスの最適化</li>
 <li>高性能なハードウェアの購入</li>
 </ul>
 </div>
-<div class="section" id="id4">
-<h2>スケールアップ<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id5">
+<h2>スケールアップ<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li>資金の問題</li>
 <li>MySQLサーバ自体が多コア、多プロセスをうまく扱うことができない</li>
 <li>スケールアップはお勧めしない</li>
 </ul>
 </div>
-<div class="section" id="id5">
-<h2>スケールアウト<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id6">
+<h2>スケールアウト<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li>レプリケーションを通じた複数のサーバへのデータ分散<ul>
 <li>読み取りをスレーブに分散</li>
@@ -135,11 +131,11 @@
 <li>おすすめの構成はマスターマスター構成のマスタースレーブ構成</li>
 </ul>
 </div>
-<div class="section" id="id6">
-<h2>機能分割<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h2>
-</div>
 <div class="section" id="id7">
-<h2>データシャーディング<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h2>
+<h2>機能分割<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="id8">
+<h2>データシャーディング<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h2>
 </div>
 </div>
 
@@ -151,27 +147,26 @@
         <div class="sphinxsidebarwrapper">
   <h3><a href="../../index.html">Table Of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">実践ハイパフォーマンスMySQL 第9章 スケーラビリティと高可用性</a><ul>
-<li><a class="reference internal" href="#id1">用語</a></li>
-<li><a class="reference internal" href="#cont">用語 cont...</a></li>
+<li><a class="reference internal" href="#">第9章 スケーラビリティと高可用性</a><ul>
+<li><a class="reference internal" href="#id2">用語</a></li>
 <li><a class="reference internal" href="#sns">SNSにおける一般的なメトリクス</a></li>
 <li><a class="reference internal" href="#mysql">MySQLのスケーリング</a></li>
-<li><a class="reference internal" href="#id2">スケーラビリティの計画</a></li>
-<li><a class="reference internal" href="#id3">スケーリング前の時間稼ぎ</a></li>
-<li><a class="reference internal" href="#id4">スケールアップ</a></li>
-<li><a class="reference internal" href="#id5">スケールアウト</a></li>
-<li><a class="reference internal" href="#id6">機能分割</a></li>
-<li><a class="reference internal" href="#id7">データシャーディング</a></li>
+<li><a class="reference internal" href="#id3">スケーラビリティの計画</a></li>
+<li><a class="reference internal" href="#id4">スケーリング前の時間稼ぎ</a></li>
+<li><a class="reference internal" href="#id5">スケールアップ</a></li>
+<li><a class="reference internal" href="#id6">スケールアウト</a></li>
+<li><a class="reference internal" href="#id7">機能分割</a></li>
+<li><a class="reference internal" href="#id8">データシャーディング</a></li>
 </ul>
 </li>
 </ul>
 
   <h4>Previous topic</h4>
-  <p class="topless"><a href="../AgileEstimatingAndPlannnig/chapter01.html"
-                        title="previous chapter">アジャイルな見積もりと計画づくり 1章 計画の目的</a></p>
+  <p class="topless"><a href="index.html"
+                        title="previous chapter">実践ハイパフォーマンスMySQL 第2版</a></p>
   <h4>Next topic</h4>
-  <p class="topless"><a href="../PeerReview/chapter01.html"
-                        title="next chapter">ピアレビュー 第1章</a></p>
+  <p class="topless"><a href="../PeerReview/index.html"
+                        title="next chapter">ピアレビューのメモ書き</a></p>
   <h3>This Page</h3>
   <ul class="this-page-menu">
     <li><a href="../../sources/book/HighPerformanceMySQL/chapter09.txt"
@@ -201,13 +196,14 @@
           <a href="../../genindex.html" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="../PeerReview/chapter01.html" title="ピアレビュー 第1章"
+          <a href="../PeerReview/index.html" title="ピアレビューのメモ書き"
              >next</a> |</li>
         <li class="right" >
-          <a href="../AgileEstimatingAndPlannnig/chapter01.html" title="アジャイルな見積もりと計画づくり 1章 計画の目的"
+          <a href="index.html" title="実践ハイパフォーマンスMySQL 第2版"
              >previous</a> |</li>
         <li><a href="../../index.html">masasuzu docs 1.0 documentation</a> &raquo;</li>
-          <li><a href="../index.html" >独書メモ</a> &raquo;</li> 
+          <li><a href="../index.html" >独書メモ</a> &raquo;</li>
+          <li><a href="index.html" >実践ハイパフォーマンスMySQL 第2版</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">
