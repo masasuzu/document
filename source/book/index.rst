@@ -7,7 +7,5 @@ Contents:
     :maxdepth: 2
     :glob:
 
-    AgileEstimatingAndPlannnig/*
-    HighPerformanceMySQL/*
-    PeerReview/*
+    */index
 
