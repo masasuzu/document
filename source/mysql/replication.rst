@@ -121,23 +121,24 @@ I/OスレッドとSQLスレッドが動いていることを確認します。
     |      12 | system user      |                       | NULL            | Connect |      0 | Has read all relay log; waiting for the slave I/O thread to update it | NULL                  |
     +---------+------------------+-----------------------+-----------------+---------+--------+-----------------------------------------------------------------------+-----------------------+
 
+スレーブの状態の確認
+
 ::
 
-    SHOW SLAVE STATUS;
     > SHOW SLAVE STATUS\G
     *************************** 1. row ***************************
                    Slave_IO_State: Waiting for master to send event
-                      Master_Host: 192.168.200.119
-                      Master_User: replication
-                      Master_Port: 3306
+                      Master_Host: 127.0.0.1
+                      Master_User: rsandbox
+                      Master_Port: 21379
                     Connect_Retry: 60
-                  Master_Log_File: 51319-bin.001705
-              Read_Master_Log_Pos: 45405275
-                   Relay_Log_File: 51251-relay-bin.130426
-                    Relay_Log_Pos: 45405177
-            Relay_Master_Log_File: 51319-bin.001705
-                 Slave_IO_Running: Yes   //
-                Slave_SQL_Running: Yes   // この二つがYesならば、レプリケーションは動いている
+                  Master_Log_File: mysql-bin.000001
+              Read_Master_Log_Pos: 2081
+                   Relay_Log_File: mysql_sandbox21380-relay-bin.000003
+                    Relay_Log_Pos: 253
+            Relay_Master_Log_File: mysql-bin.000001
+                 Slave_IO_Running: Yes //
+                Slave_SQL_Running: Yes // 2個ともYesならレプリケーションが実行されている
                   Replicate_Do_DB:
               Replicate_Ignore_DB:
                Replicate_Do_Table:
@@ -147,8 +148,8 @@ I/OスレッドとSQLスレッドが動いていることを確認します。
                        Last_Errno: 0
                        Last_Error:
                      Skip_Counter: 0
-              Exec_Master_Log_Pos: 45405032
-                  Relay_Log_Space: 45405618
+              Exec_Master_Log_Pos: 2081
+                  Relay_Log_Space: 2542
                   Until_Condition: None
                    Until_Log_File:
                     Until_Log_Pos: 0
@@ -158,10 +159,11 @@ I/OスレッドとSQLスレッドが動いていることを確認します。
                   Master_SSL_Cert:
                 Master_SSL_Cipher:
                    Master_SSL_Key:
-            Seconds_Behind_Master: 0  // マスターからどのくらい遅れているかの目安。0以外なら遅延している
+            Seconds_Behind_Master: 0  // マスターからどの程度データが遅れているかの目安。0でなければ遅延している。
     Master_SSL_Verify_Server_Cert: No
                     Last_IO_Errno: 0
                     Last_IO_Error:
                    Last_SQL_Errno: 0
                    Last_SQL_Error:
-
+      Replicate_Ignore_Server_Ids:
+                 Master_Server_Id: 1
