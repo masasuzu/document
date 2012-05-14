@@ -1,0 +1,252 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>MySQLのレプリケーション &mdash; masasuzu docs 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="../static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../static/jquery.js"></script>
+    <script type="text/javascript" src="../static/underscore.js"></script>
+    <script type="text/javascript" src="../static/doctools.js"></script>
+    <link rel="top" title="masasuzu docs 1.0 documentation" href="../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li><a href="../index.html">masasuzu docs 1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="mysql">
+<h1>MySQLのレプリケーション<a class="headerlink" href="#mysql" title="Permalink to this headline">¶</a></h1>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Version:</th><td class="field-body">1.0 of 2012/05/14</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Author:</th><td class="field-body">SUZUKI Masashi / masasuzu</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Mail:</th><td class="field-body"><a class="reference external" href="mailto:m15&#46;suzuki&#46;masashi&#37;&#52;&#48;gmail&#46;com">m15<span>&#46;</span>suzuki<span>&#46;</span>masashi<span>&#64;</span>gmail<span>&#46;</span>com</a></td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="id1">
+<h2>概要<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<p>DBの複製を別のサーバに作ることとその仕組みをレプリケーションと言います。データの複製元をマスター、複製先をスレーブと呼びます。
+1台のマスターに対して複数台のスレーブを設定することが可能です。</p>
+<p>マスターとスレーブのデータはリアルタイムでコピーされますが、基本的に非同期であるため、スレーブのデータが最新であることは保証されません。
+スレーブを使用する際、遅延が置きうることをあらかじめ考慮しておく必要があります。</p>
+</div>
+<div class="section" id="id2">
+<h2>目的<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>データのコピー</li>
+<li>負荷分散</li>
+<li>バックアップ<ul>
+<li>ただし、レプリケーション自体はバックアップでは無い。</li>
+</ul>
+</li>
+<li>可用性の向上<ul>
+<li>複数台のスレーブとスレーブDBに対するフェイルオーバーシステムがあれば、SPOFの解消となる。</li>
+</ul>
+</li>
+<li>MySQLのアップグレードのテスト</li>
+</ul>
+</div>
+<div class="section" id="id3">
+<h2>レプリケーションの仕組み<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
+<p>単純化するとレプリケーションは以下のような仕組みで動いています。</p>
+<ol class="arabic simple">
+<li>マスターがデータの更新内容をバイナリログに記録する</li>
+<li>スレーブがバイナリログを読み取ってリレーログにコピーする (I/Oスレッド)</li>
+<li>スレーブがリレーログの内容を再生して、自身のデータを更新する (SQLスレッド)</li>
+</ol>
+<p>スレーブがコピーしているのは、マスターのDB(ストレージエンジン)に入っているデータでは無く、バイナリログの中身です。</p>
+<p>ここで注意しなくてはいけないのはマスターでのデータ更新は並列で行えるのに対し、スレーブにおけるリレーログの再生は直列で行われるるため、マスターで大量の更新があるとスレーブの遅延が激しくなります。</p>
+</div>
+<div class="section" id="id4">
+<h2>設定<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id5">
+<h3>レプリケーションアカウントの設定<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
+<p>両サーバでREPLICATION SLAVE, REPLICATION CLIENTの権限を与えたユーザを作成します。</p>
+<p>REPLICATION SLAVEが実際にレプリケーションを行う権限。REPLICATION CLIENTはレプリケーションの監視コマンドを実行する権限です。</p>
+<div class="highlight-python"><pre>GRANT REPLICATION SLAVE, REPLICATION CLIENT ON *.* TO replication@'192.168.1.%' IDENTIFIED BY 'replpasswd';</pre>
+</div>
+</div>
+<div class="section" id="id6">
+<h3>マスターの設定<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h3>
+<p>マスター上で一意なサーバーIDの指定とバイナリログを出力させる設定を入れる必要があります。</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">log_bin</span><span class="o">=</span><span class="n">mysql</span><span class="o">-</span><span class="nb">bin</span>   <span class="c"># host名を付けておくと無難</span>
+<span class="n">server_id</span><span class="o">=</span><span class="mi">10</span>        <span class="c"># IPアドレスの4オクテット目を付けることが多い</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id7">
+<h3>スレーブ設定<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h3>
+<p>マスターに障碍が起きたときにスレーブがマスターに昇格できるようにバイナリログを出力させます。log_slave_updatesを入れることでSQLスレッドで再生された更新をバイナリログに出力できます。
+また、スレーブには書き込みをさせないようにread_onlyを入れておきます。</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">log_bin</span><span class="o">=</span><span class="n">mysql</span><span class="o">-</span><span class="nb">bin</span>   <span class="c"># host名を付けておくと無難</span>
+<span class="n">server_id</span><span class="o">=</span><span class="mi">20</span>        <span class="c"># IPアドレスの4オクテット目を付けることが多い</span>
+<span class="n">read_only</span><span class="o">=</span><span class="mi">1</span>
+<span class="n">log_slave_updates</span><span class="o">=</span><span class="mi">1</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id8">
+<h3>スレーブの開始<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils">
+<dt>::</dt>
+<dd><dl class="first docutils">
+<dt>CHANGE MASTER TO MASTER_HOST=&#8217;master_host&#8217;,</dt>
+<dd>MASTER_USER=&#8217;replication&#8217;,
+MASTER_PASSWORD=&#8217;replpasswd&#8217;;</dd>
+</dl>
+<p class="last">SLAVE START;</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="id9">
+<h3>スレーブの状態確認<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h3>
+<p>I/OスレッドとSQLスレッドが動いていることを確認します。</p>
+<div class="highlight-python"><pre>&gt; SHOW FULL PROCESSLIST;
++---------+------------------+-----------------------+-----------------+---------+--------+-----------------------------------------------------------------------+-----------------------+
+| Id      | User             | Host                  | db              | Command | Time   | State                                                                 | Info                  |
++---------+------------------+-----------------------+-----------------+---------+--------+-----------------------------------------------------------------------+-----------------------+
+|      11 | system user      |                       | NULL            | Connect | 393287 | Waiting for master to send event                                      | NULL                  |
+|      12 | system user      |                       | NULL            | Connect |      0 | Has read all relay log; waiting for the slave I/O thread to update it | NULL                  |
++---------+------------------+-----------------------+-----------------+---------+--------+-----------------------------------------------------------------------+-----------------------+</pre>
+</div>
+<div class="highlight-python"><pre>SHOW SLAVE STATUS;
+&gt; SHOW SLAVE STATUS\G
+*************************** 1. row ***************************
+               Slave_IO_State: Waiting for master to send event
+                  Master_Host: 192.168.200.119
+                  Master_User: replication
+                  Master_Port: 3306
+                Connect_Retry: 60
+              Master_Log_File: 51319-bin.001705
+          Read_Master_Log_Pos: 45405275
+               Relay_Log_File: 51251-relay-bin.130426
+                Relay_Log_Pos: 45405177
+        Relay_Master_Log_File: 51319-bin.001705
+             Slave_IO_Running: Yes   //
+            Slave_SQL_Running: Yes   // この二つがYesならば、レプリケーションは動いている
+              Replicate_Do_DB:
+          Replicate_Ignore_DB:
+           Replicate_Do_Table:
+       Replicate_Ignore_Table:
+      Replicate_Wild_Do_Table:
+  Replicate_Wild_Ignore_Table:
+                   Last_Errno: 0
+                   Last_Error:
+                 Skip_Counter: 0
+          Exec_Master_Log_Pos: 45405032
+              Relay_Log_Space: 45405618
+              Until_Condition: None
+               Until_Log_File:
+                Until_Log_Pos: 0
+           Master_SSL_Allowed: No
+           Master_SSL_CA_File:
+           Master_SSL_CA_Path:
+              Master_SSL_Cert:
+            Master_SSL_Cipher:
+               Master_SSL_Key:
+        Seconds_Behind_Master: 0  // マスターからどのくらい遅れているかの目安。0以外なら遅延している
+Master_SSL_Verify_Server_Cert: No
+                Last_IO_Errno: 0
+                Last_IO_Error:
+               Last_SQL_Errno: 0
+               Last_SQL_Error:</pre>
+</div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">MySQLのレプリケーション</a><ul>
+<li><a class="reference internal" href="#id1">概要</a></li>
+<li><a class="reference internal" href="#id2">目的</a></li>
+<li><a class="reference internal" href="#id3">レプリケーションの仕組み</a></li>
+<li><a class="reference internal" href="#id4">設定</a><ul>
+<li><a class="reference internal" href="#id5">レプリケーションアカウントの設定</a></li>
+<li><a class="reference internal" href="#id6">マスターの設定</a></li>
+<li><a class="reference internal" href="#id7">スレーブ設定</a></li>
+<li><a class="reference internal" href="#id8">スレーブの開始</a></li>
+<li><a class="reference internal" href="#id9">スレーブの状態確認</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../sources/mysql/replication.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li><a href="../index.html">masasuzu docs 1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2012, masasuzu / SUZUKI Masashi.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.2.
+    </div>
+  </body>
+</html>

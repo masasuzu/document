@@ -1,11 +1,12 @@
-勉強会とかのメモ
+MySQL関連の雑多な記事
 ===============================================
 
 Contents:
 
 .. toctree::
     :maxdepth: 2
-    :glob:
 
-    2012-02-21_jenkins_study
+    replication
+    storage_engine
+
 

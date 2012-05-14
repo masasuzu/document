@@ -160,9 +160,21 @@ generate           ^            &lt;-----------------      |
 <div class="section" id="id4">
 <h2>メモリ<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
 <p>物理メモリ、仮想メモリとかページキャッシュの話</p>
-</div>
 <div class="section" id="id5">
-<h2>ps<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
+<h3>ディスクとメモリの速度差<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
+<p>hdparmコマンドを使うとメモリとディスクの読み込みの速度差をはかることができます。
+以下の結果から100倍以上速度差があることが分かります。
+I/O負荷が高いDBサーバではいかにディスクリードをさせないかが負荷対策の鍵となることがおわかりいただけると思います。</p>
+<div class="highlight-python"><pre>% sudo hdparm -tT /dev/sda
+
+/dev/sda:
+Timing cached reads:   12164 MB in  2.00 seconds = 6095.71 MB/sec
+Timing buffered disk reads:  130 MB in  3.04 seconds =  42.17 MB/sec</pre>
+</div>
+</div>
+</div>
+<div class="section" id="id6">
+<h2>ps<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h2>
 </div>
 <div class="section" id="top">
 <h2>top<a class="headerlink" href="#top" title="Permalink to this headline">¶</a></h2>
@@ -185,6 +197,19 @@ generate           ^            &lt;-----------------      |
 <div class="section" id="dstat">
 <h2>dstat<a class="headerlink" href="#dstat" title="Permalink to this headline">¶</a></h2>
 </div>
+<div class="section" id="see-also">
+<h2>SEE ALSO<a class="headerlink" href="#see-also" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>大規模サービス技術入門<ul>
+<li><a class="reference external" href="http://www.amazon.co.jp/dp/4774143073">http://www.amazon.co.jp/dp/4774143073</a></li>
+</ul>
+</li>
+<li>サーバ/インフラを支える技術<ul>
+<li><a class="reference external" href="http://www.amazon.co.jp/dp/4774135666">http://www.amazon.co.jp/dp/4774135666</a></li>
+</ul>
+</li>
+</ul>
+</div>
 </div>
 
 
@@ -202,8 +227,11 @@ generate           ^            &lt;-----------------      |
 <li><a class="reference internal" href="#ps">ps</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#id4">メモリ</a></li>
-<li><a class="reference internal" href="#id5">ps</a></li>
+<li><a class="reference internal" href="#id4">メモリ</a><ul>
+<li><a class="reference internal" href="#id5">ディスクとメモリの速度差</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id6">ps</a></li>
 <li><a class="reference internal" href="#top">top</a></li>
 <li><a class="reference internal" href="#mpstat">mpstat</a></li>
 <li><a class="reference internal" href="#iostat">iostat</a></li>
@@ -211,6 +239,7 @@ generate           ^            &lt;-----------------      |
 <li><a class="reference internal" href="#netstat">netstat</a></li>
 <li><a class="reference internal" href="#sar">sar</a></li>
 <li><a class="reference internal" href="#dstat">dstat</a></li>
+<li><a class="reference internal" href="#see-also">SEE ALSO</a></li>
 </ul>
 </li>
 </ul>
