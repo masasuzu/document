@@ -25,7 +25,10 @@
     <script type="text/javascript" src="../static/jquery.js"></script>
     <script type="text/javascript" src="../static/underscore.js"></script>
     <script type="text/javascript" src="../static/doctools.js"></script>
-    <link rel="top" title="masasuzu docs 1.0 documentation" href="../index.html" /> 
+    <link rel="top" title="masasuzu docs 1.0 documentation" href="../index.html" />
+    <link rel="up" title="MySQL関連の雑多な記事" href="index.html" />
+    <link rel="next" title="ネットワークに関する雑多な記事" href="../network/index.html" />
+    <link rel="prev" title="MySQLのレプリケーション" href="replication.html" /> 
   </head>
   <body>
     <div class="related">
@@ -34,7 +37,14 @@
         <li class="right" style="margin-right: 10px">
           <a href="../genindex.html" title="General Index"
              accesskey="I">index</a></li>
-        <li><a href="../index.html">masasuzu docs 1.0 documentation</a> &raquo;</li> 
+        <li class="right" >
+          <a href="../network/index.html" title="ネットワークに関する雑多な記事"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="replication.html" title="MySQLのレプリケーション"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">masasuzu docs 1.0 documentation</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">MySQL関連の雑多な記事</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -59,15 +69,48 @@
 </table>
 <div class="section" id="mysql">
 <h2>MySQLのストレージエンジン<a class="headerlink" href="#mysql" title="Permalink to this headline">¶</a></h2>
+<p>ストレージエンジンとはデータの保存および取り出しを行う機構のことを指します。主なストレージエンジンとしてMyISAM、InnoDBがあります。</p>
+<p>使用できるストレージエンジンはSHOW ENGINESで確認できます。</p>
+<div class="highlight-python"><pre>&gt; SHOW ENGINES;
++--------------------+---------+----------------------------------------------------------------+--------------+------+------------+
+| Engine             | Support | Comment                                                        | Transactions | XA   | Savepoints |
++--------------------+---------+----------------------------------------------------------------+--------------+------+------------+
+| FEDERATED          | NO      | Federated MySQL storage engine                                 | NULL         | NULL | NULL       |
+| MRG_MYISAM         | YES     | Collection of identical MyISAM tables                          | NO           | NO   | NO         |
+| MyISAM             | YES     | MyISAM storage engine                                          | NO           | NO   | NO         |
+| BLACKHOLE          | YES     | /dev/null storage engine (anything you write to it disappears) | NO           | NO   | NO         |
+| CSV                | YES     | CSV storage engine                                             | NO           | NO   | NO         |
+| MEMORY             | YES     | Hash based, stored in memory, useful for temporary tables      | NO           | NO   | NO         |
+| ARCHIVE            | YES     | Archive storage engine                                         | NO           | NO   | NO         |
+| InnoDB             | DEFAULT | Supports transactions, row-level locking, and foreign keys     | YES          | YES  | YES        |
+| PERFORMANCE_SCHEMA | YES     | Performance Schema                                             | NO           | NO   | NO         |
++--------------------+---------+----------------------------------------------------------------+--------------+------+------------+</pre>
+</div>
 </div>
 <div class="section" id="myisam">
 <h2>MyISAM<a class="headerlink" href="#myisam" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>MySQL 5.1までのデフォルトのストレージエンジン</li>
+<li>テーブル全体をロックする</li>
+<li>トランザクション処理が不可能</li>
+<li>テーブルの行数を保持しているのでCOUNTクエリが高速</li>
+</ul>
 </div>
 <div class="section" id="innodb">
 <h2>InnoDB<a class="headerlink" href="#innodb" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>MySQL 5.5からデフォルトのストレージエンジン</li>
+<li>トランザクション可能</li>
+<li>行ロックが可能</li>
+<li>主キーによるルックアップが高速</li>
+</ul>
 </div>
 <div class="section" id="blackhole">
 <h2>BLACKHOLE<a class="headerlink" href="#blackhole" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>データを一切保持しない</li>
+<li>ただし、バイナリログには書き込む</li>
+</ul>
 </div>
 </div>
 
@@ -88,6 +131,12 @@
 </li>
 </ul>
 
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="replication.html"
+                        title="previous chapter">MySQLのレプリケーション</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../network/index.html"
+                        title="next chapter">ネットワークに関する雑多な記事</a></p>
   <h3>This Page</h3>
   <ul class="this-page-menu">
     <li><a href="../sources/mysql/storage_engine.txt"
@@ -116,7 +165,14 @@
         <li class="right" style="margin-right: 10px">
           <a href="../genindex.html" title="General Index"
              >index</a></li>
-        <li><a href="../index.html">masasuzu docs 1.0 documentation</a> &raquo;</li> 
+        <li class="right" >
+          <a href="../network/index.html" title="ネットワークに関する雑多な記事"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="replication.html" title="MySQLのレプリケーション"
+             >previous</a> |</li>
+        <li><a href="../index.html">masasuzu docs 1.0 documentation</a> &raquo;</li>
+          <li><a href="index.html" >MySQL関連の雑多な記事</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">
