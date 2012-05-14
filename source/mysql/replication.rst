@@ -45,6 +45,7 @@ DBの複製を別のサーバに作ることとその仕組みをレプリケー
 2. スレーブがバイナリログを読み取ってリレーログにコピーする (I/Oスレッド)
 3. スレーブがリレーログの内容を再生して、自身のデータを更新する (SQLスレッド)
 
+TODO: 図解入れるよ
 
 スレーブがコピーしているのは、マスターのDB(ストレージエンジン)に入っているデータでは無く、バイナリログの中身です。
 
@@ -95,6 +96,7 @@ REPLICATION SLAVEが実際にレプリケーションを行う権限。REPLICATI
 ------------------------------------
 
 ::
+
     CHANGE MASTER TO MASTER_HOST='master_host',
         MASTER_USER='replication',
         MASTER_PASSWORD='replpasswd';
