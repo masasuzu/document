@@ -25,7 +25,10 @@
     <script type="text/javascript" src="../static/jquery.js"></script>
     <script type="text/javascript" src="../static/underscore.js"></script>
     <script type="text/javascript" src="../static/doctools.js"></script>
-    <link rel="top" title="masasuzu docs 1.0 documentation" href="../index.html" /> 
+    <link rel="top" title="masasuzu docs 1.0 documentation" href="../index.html" />
+    <link rel="up" title="MySQL関連の雑多な記事" href="index.html" />
+    <link rel="next" title="ストレージエンジンの話" href="storage_engine.html" />
+    <link rel="prev" title="MySQL関連の雑多な記事" href="index.html" /> 
   </head>
   <body>
     <div class="related">
@@ -34,7 +37,14 @@
         <li class="right" style="margin-right: 10px">
           <a href="../genindex.html" title="General Index"
              accesskey="I">index</a></li>
-        <li><a href="../index.html">masasuzu docs 1.0 documentation</a> &raquo;</li> 
+        <li class="right" >
+          <a href="storage_engine.html" title="ストレージエンジンの話"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="MySQL関連の雑多な記事"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">masasuzu docs 1.0 documentation</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">MySQL関連の雑多な記事</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -88,6 +98,7 @@
 <li>スレーブがバイナリログを読み取ってリレーログにコピーする (I/Oスレッド)</li>
 <li>スレーブがリレーログの内容を再生して、自身のデータを更新する (SQLスレッド)</li>
 </ol>
+<p>TODO: 図解入れるよ</p>
 <p>スレーブがコピーしているのは、マスターのDB(ストレージエンジン)に入っているデータでは無く、バイナリログの中身です。</p>
 <p>ここで注意しなくてはいけないのはマスターでのデータ更新は並列で行えるのに対し、スレーブにおけるリレーログの再生は直列で行われるるため、マスターで大量の更新があるとスレーブの遅延が激しくなります。</p>
 </div>
@@ -121,16 +132,12 @@
 </div>
 <div class="section" id="id8">
 <h3>スレーブの開始<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h3>
-<dl class="docutils">
-<dt>::</dt>
-<dd><dl class="first docutils">
-<dt>CHANGE MASTER TO MASTER_HOST=&#8217;master_host&#8217;,</dt>
-<dd>MASTER_USER=&#8217;replication&#8217;,
-MASTER_PASSWORD=&#8217;replpasswd&#8217;;</dd>
-</dl>
-<p class="last">SLAVE START;</p>
-</dd>
-</dl>
+<div class="highlight-python"><pre>CHANGE MASTER TO MASTER_HOST='master_host',
+    MASTER_USER='replication',
+    MASTER_PASSWORD='replpasswd';
+
+SLAVE START;</pre>
+</div>
 </div>
 <div class="section" id="id9">
 <h3>スレーブの状態確認<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h3>
@@ -213,6 +220,12 @@ Master_SSL_Verify_Server_Cert: No
 </li>
 </ul>
 
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="index.html"
+                        title="previous chapter">MySQL関連の雑多な記事</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="storage_engine.html"
+                        title="next chapter">ストレージエンジンの話</a></p>
   <h3>This Page</h3>
   <ul class="this-page-menu">
     <li><a href="../sources/mysql/replication.txt"
@@ -241,7 +254,14 @@ Master_SSL_Verify_Server_Cert: No
         <li class="right" style="margin-right: 10px">
           <a href="../genindex.html" title="General Index"
              >index</a></li>
-        <li><a href="../index.html">masasuzu docs 1.0 documentation</a> &raquo;</li> 
+        <li class="right" >
+          <a href="storage_engine.html" title="ストレージエンジンの話"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="MySQL関連の雑多な記事"
+             >previous</a> |</li>
+        <li><a href="../index.html">masasuzu docs 1.0 documentation</a> &raquo;</li>
+          <li><a href="index.html" >MySQL関連の雑多な記事</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">
