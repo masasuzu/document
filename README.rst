@@ -24,4 +24,3 @@
 
 :Mail:
     m15.suzuki.masashi [あっと] gmail.com
-
