@@ -1,0 +1,206 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>継続的デリバリー2回目 &mdash; masasuzu docs 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="../static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../static/jquery.js"></script>
+    <script type="text/javascript" src="../static/underscore.js"></script>
+    <script type="text/javascript" src="../static/doctools.js"></script>
+    <link rel="top" title="masasuzu docs 1.0 documentation" href="../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li><a href="../index.html">masasuzu docs 1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="id1">
+<h1>継続的デリバリー2回目<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li>ファイルサーバは書き換えられうるので信用ならない。</li>
+<li>hgとsvnは連携できるけど、リビジョンでで指定するので完全には連携できない。</li>
+<li>実装方法が決まらないと見積もりだせないよ</li>
+<li>継続的デリバリーはwebアプリと金融屋が書いた本。</li>
+<li>メンバーが替わらないのが大きい<ul>
+<li>変わっていたら旨く回っていないとおもう。</li>
+</ul>
+</li>
+<li>3人メンバーでもsvnロックをかける</li>
+<li><a class="reference external" href="http://d.hatena.ne.jp/troter/20111225/1324823716">http://d.hatena.ne.jp/troter/20111225/1324823716</a></li>
+<li>pull request使うと変なのが減る。手戻りは減る</li>
+<li>chrominumのビルドの話<ul>
+<li><a class="reference external" href="http://steps.dodgson.org/b/2012/05/20/gardening-with-canaries/">http://steps.dodgson.org/b/2012/05/20/gardening-with-canaries/</a></li>
+<li><a class="reference external" href="http://steps.dodgson.org/b/2012/02/19/wild-coding/">http://steps.dodgson.org/b/2012/02/19/wild-coding/</a></li>
+</ul>
+</li>
+<li>sikuli<ul>
+<li><a class="reference external" href="http://sikuli.org/">http://sikuli.org/</a></li>
+</ul>
+</li>
+</ul>
+<div class="section" id="trunk">
+<h2>定期的にtrunkにチェックインする<a class="headerlink" href="#trunk" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>関連する変更はcherry-pickするとコンフリクトしにくい</li>
+<li>ブランチは最強では無い。</li>
+<li>redmineはブランチができすぎて大変になった</li>
+<li>propsal branch<ul>
+<li>オープンソース向き</li>
+<li>基本的にコミット権はコミッタしかない</li>
+</ul>
+</li>
+<li>意味的衝突<ul>
+<li><a class="reference external" href="http://capsctrl.que.jp/kdmsnr/wiki/bliki/?SemanticConflict">http://capsctrl.que.jp/kdmsnr/wiki/bliki/?SemanticConflict</a></li>
+</ul>
+</li>
+<li>rebaseよりグラフからcherry-pickして方がやりやすい</li>
+<li>大きい変更をするときはリファクタリングブランチを作る</li>
+</ul>
+</div>
+<div class="section" id="id2">
+<h2>コミットメッセージ<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Mercurialのコミットメッセージの書き方<ul>
+<li><a class="reference external" href="http://mercurial.selenic.com/wiki/ContributingChanges#Patch_descriptions">http://mercurial.selenic.com/wiki/ContributingChanges#Patch_descriptions</a></li>
+</ul>
+</li>
+<li>17時くらいにgithubが重い =&gt; あっちの方の夜12時</li>
+</ul>
+</div>
+<div class="section" id="id3">
+<h2>ソフトウェアの設定<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>YAGNI</li>
+<li>設定ファイルのメンテナンス</li>
+<li>shelldoctest<ul>
+<li><a class="reference external" href="http://code.google.com/p/shell-doctest/">http://code.google.com/p/shell-doctest/</a></li>
+</ul>
+</li>
+<li>ライブラリは最新版は追従して、バグっていたらすぐにresetで無かったことにする</li>
+<li>最新版を追従すると自然とテストするようになる。</li>
+<li>OSSを使っているのでバグ報告は義務</li>
+<li>エンジニアは前のめりにならないとダメ</li>
+<li>chefには設定ファイルテンプレート機能がある</li>
+<li>1プロジェクトで複数レポジトリを使う</li>
+<li>windowsの人はどうやって自動化しているのかな?</li>
+<li>azureにgunmaリージョンがある</li>
+<li>pivotal tracker
+* <a class="reference external" href="http://www.pivotaltracker.com/">http://www.pivotaltracker.com/</a></li>
+<li>週4時間だけ働く<ul>
+<li><a class="reference external" href="http://www.amazon.co.jp/dp/4905042097">http://www.amazon.co.jp/dp/4905042097</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="id4">
+<h2>環境管理<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>vagrant<ul>
+<li><a class="reference external" href="https://github.com/facebook/tornado">https://github.com/facebook/tornado</a></li>
+</ul>
+</li>
+<li><a class="reference external" href="http://readthedocs.org/">http://readthedocs.org/</a></li>
+<li><a class="reference external" href="https://github.com/rtfd/readthedocs.org">https://github.com/rtfd/readthedocs.org</a></li>
+<li>pappetは無い?</li>
+<li>chef と capistranoでいいんじゃないの?</li>
+<li>環境構築系<ul>
+<li>chef</li>
+<li>pappet</li>
+<li>fabric</li>
+</ul>
+</li>
+<li>デプロイ<ul>
+<li>capistrano</li>
+<li>fabric</li>
+</ul>
+</li>
+<li>環境構築を新人にやらせるのは無駄?</li>
+<li>複数プロジェクトを立てているならJenkinsは複数立てた方が楽かも知れない</li>
+<li>オックスフォードが月600$でホストしているよ</li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">継続的デリバリー2回目</a><ul>
+<li><a class="reference internal" href="#trunk">定期的にtrunkにチェックインする</a></li>
+<li><a class="reference internal" href="#id2">コミットメッセージ</a></li>
+<li><a class="reference internal" href="#id3">ソフトウェアの設定</a></li>
+<li><a class="reference internal" href="#id4">環境管理</a></li>
+</ul>
+</li>
+</ul>
+
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../sources/study/2012-05-26_cdelivery.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li><a href="../index.html">masasuzu docs 1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2012, masasuzu / SUZUKI Masashi.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.2.
+    </div>
+  </body>
+</html>
