@@ -8,4 +8,8 @@ Contents:
     :glob:
 
     2012-02-21_jenkins_study
+    2012-04-28_shikakudou
+    2012-05-18_fluentd_casual
+    2012-05-26_cdelivery
+
 
