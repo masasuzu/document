@@ -67,6 +67,55 @@
 <li><a class="reference external" href="http://www.slideshare.net/tagomoris/plugins-by-tagomoris-fluentdcasual">http://www.slideshare.net/tagomoris/plugins-by-tagomoris-fluentdcasual</a></li>
 </ul>
 </div>
+<div class="section" id="fluentd">
+<h2>fluentdとは、<a class="headerlink" href="#fluentd" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>ググれ<ul>
+<li><a class="reference external" href="http://fluentd.org/doc/">http://fluentd.org/doc/</a></li>
+<li><a class="reference external" href="https://github.com/fluent/fluentd">https://github.com/fluent/fluentd</a></li>
+<li><a class="reference external" href="http://d.hatena.ne.jp/masasuz/20120520/1337518231">http://d.hatena.ne.jp/masasuz/20120520/1337518231</a></li>
+<li>rvmで入れられる</li>
+<li>treasure dataがdeb packageを提供しているのでこっちを使うとお手軽<ul>
+<li><a class="reference external" href="https://github.com/treasure-data/td-agent">https://github.com/treasure-data/td-agent</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>ログを転送、収集ツール</li>
+<li>ログデータのフォーマットはJSON</li>
+<li>入力<ul>
+<li>アプリがログを投げる</li>
+<li>既存のログをtail</li>
+<li>他のfluentdから転送</li>
+</ul>
+</li>
+<li>出力<ul>
+<li>ファイル</li>
+<li>メール</li>
+<li>DB mongodbとか</li>
+<li>growthforecast</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="id2">
+<h2>何となく私見<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<p>以下自己メモ</p>
+<ul class="simple">
+<li>ひとまず、32bit lennyのdebを作るのはできたから、ちょこちょこ試したい。</li>
+<li>ログを貯めるのはmongdbかなー。<ul>
+<li>その辺も検証しないといけないから、まずはファイルかな。</li>
+</ul>
+</li>
+<li>apache logをtailして転送が一番実現が早いかな。</li>
+<li>errorlogをパースして集約するとものすごい捗りそう</li>
+<li>accesslogを集計してレスポンスタイムを可視化したい<ul>
+<li><a class="reference external" href="http://dl.dropbox.com/u/224433/fluentd_casual_1/index.html#15">http://dl.dropbox.com/u/224433/fluentd_casual_1/index.html#15</a></li>
+</ul>
+</li>
+<li>CPUをけっこう使うとか言われているけど、大規模じゃ無ければ大丈夫かな?</li>
+</ul>
+</div>
 <div class="section" id="fluentd-oranie">
 <h2>fluentdはじめました &#64;oranie<a class="headerlink" href="#fluentd-oranie" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
@@ -83,8 +132,8 @@
 <li>syslog-ngオワコン?</li>
 <li>cronのタイムラグ</li>
 </ul>
-<div class="section" id="id2">
-<h3>いいところ<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id3">
+<h3>いいところ<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li>プラグインが豊富</li>
 <li>設定が柔軟</li>
@@ -92,14 +141,14 @@
 <li>td-agentを使うと捗る</li>
 </ul>
 </div>
-<div class="section" id="id3">
-<h3>構成<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id4">
+<h3>構成<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li>収集サーバ =&gt; 中間サーバ =&gt; 集計サーバ</li>
 </ul>
 </div>
-<div class="section" id="id4">
-<h3>困ったこと<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id5">
+<h3>困ったこと<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li>公式ドキュメントが古い</li>
 <li>プラグインの情報が散在</li>
@@ -131,8 +180,8 @@
 <li>全数検査的に割合を見てみると良い</li>
 </ul>
 </div>
-<div class="section" id="id5">
-<h3>ユーザログ<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id6">
+<h3>ユーザログ<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li>fluentd =&gt; mongodb</li>
 <li>ユーザログを貯めている</li>
@@ -281,15 +330,17 @@
   <ul>
 <li><a class="reference internal" href="#">2012-05-12 fluentd casual</a><ul>
 <li><a class="reference internal" href="#id1">資料まとめ</a></li>
+<li><a class="reference internal" href="#fluentd">fluentdとは、</a></li>
+<li><a class="reference internal" href="#id2">何となく私見</a></li>
 <li><a class="reference internal" href="#fluentd-oranie">fluentdはじめました &#64;oranie</a><ul>
-<li><a class="reference internal" href="#id2">いいところ</a></li>
-<li><a class="reference internal" href="#id3">構成</a></li>
-<li><a class="reference internal" href="#id4">困ったこと</a></li>
+<li><a class="reference internal" href="#id3">いいところ</a></li>
+<li><a class="reference internal" href="#id4">構成</a></li>
+<li><a class="reference internal" href="#id5">困ったこと</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#fluentdweb-fujiwara">fluentdでwebサイト運用を楽にする &#64;fujiwara</a><ul>
 <li><a class="reference internal" href="#access-log">access log</a></li>
-<li><a class="reference internal" href="#id5">ユーザログ</a></li>
+<li><a class="reference internal" href="#id6">ユーザログ</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#fluentd-kzk-mover">小さく始めるfluentd &#64;kzk_mover</a></li>
