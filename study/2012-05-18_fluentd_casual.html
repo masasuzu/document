@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>fluentd casual &mdash; masasuzu docs 1.0 documentation</title>
+    <title>2012-05-12 fluentd casual &mdash; masasuzu docs 1.0 documentation</title>
     
     <link rel="stylesheet" href="../static/default.css" type="text/css" />
     <link rel="stylesheet" href="../static/pygments.css" type="text/css" />
@@ -25,7 +25,10 @@
     <script type="text/javascript" src="../static/jquery.js"></script>
     <script type="text/javascript" src="../static/underscore.js"></script>
     <script type="text/javascript" src="../static/doctools.js"></script>
-    <link rel="top" title="masasuzu docs 1.0 documentation" href="../index.html" /> 
+    <link rel="top" title="masasuzu docs 1.0 documentation" href="../index.html" />
+    <link rel="up" title="勉強会とかのメモ" href="index.html" />
+    <link rel="next" title="継続的デリバリー2回目" href="2012-05-26_cdelivery.html" />
+    <link rel="prev" title="鹿駆動 2012-04-29" href="2012-04-28_shikakudou.html" /> 
   </head>
   <body>
     <div class="related">
@@ -34,7 +37,14 @@
         <li class="right" style="margin-right: 10px">
           <a href="../genindex.html" title="General Index"
              accesskey="I">index</a></li>
-        <li><a href="../index.html">masasuzu docs 1.0 documentation</a> &raquo;</li> 
+        <li class="right" >
+          <a href="2012-05-26_cdelivery.html" title="継続的デリバリー2回目"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="2012-04-28_shikakudou.html" title="鹿駆動 2012-04-29"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">masasuzu docs 1.0 documentation</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">勉強会とかのメモ</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -44,10 +54,26 @@
           <div class="body">
             
   <div class="section" id="fluentd-casual">
-<h1>fluentd casual<a class="headerlink" href="#fluentd-casual" title="Permalink to this headline">¶</a></h1>
+<h1>2012-05-12 fluentd casual<a class="headerlink" href="#fluentd-casual" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="id1">
+<h2>資料まとめ<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><a class="reference external" href="http://togetter.com/li/305806">http://togetter.com/li/305806</a></li>
+<li><a class="reference external" href="http://dl.dropbox.com/u/224433/fluentd_casual_1/index.html">http://dl.dropbox.com/u/224433/fluentd_casual_1/index.html</a></li>
+<li><a class="reference external" href="http://www.slideshare.net/oranie/fluentd-casual-12981506">http://www.slideshare.net/oranie/fluentd-casual-12981506</a></li>
+<li><a class="reference external" href="http://www.slideshare.net/treasure-data/fluentd-for-small-projects-fluentd-casual-20120518">http://www.slideshare.net/treasure-data/fluentd-for-small-projects-fluentd-casual-20120518</a></li>
+<li><a class="reference external" href="https://docs.google.com/presentation/embed?id=1uFqdgCKJnD87Yad3MLTM00G9pbtWTRe1ptDn4OUC-sI">https://docs.google.com/presentation/embed?id=1uFqdgCKJnD87Yad3MLTM00G9pbtWTRe1ptDn4OUC-sI</a></li>
+<li><a class="reference external" href="http://www.slideshare.net/katsyoshi/fluentd">http://www.slideshare.net/katsyoshi/fluentd</a></li>
+<li><a class="reference external" href="http://www.slideshare.net/tagomoris/plugins-by-tagomoris-fluentdcasual">http://www.slideshare.net/tagomoris/plugins-by-tagomoris-fluentdcasual</a></li>
+</ul>
+</div>
 <div class="section" id="fluentd-oranie">
 <h2>fluentdはじめました &#64;oranie<a class="headerlink" href="#fluentd-oranie" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
+<li>資料<ul>
+<li><a class="reference external" href="http://www.slideshare.net/oranie/fluentd-casual-12981506">http://www.slideshare.net/oranie/fluentd-casual-12981506</a></li>
+</ul>
+</li>
 <li>カジュアル枠で参加</li>
 <li>fluentd使ってみました</li>
 <li>web serverのレスポンスの統計とか</li>
@@ -57,8 +83,8 @@
 <li>syslog-ngオワコン?</li>
 <li>cronのタイムラグ</li>
 </ul>
-<div class="section" id="id1">
-<h3>いいところ<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id2">
+<h3>いいところ<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li>プラグインが豊富</li>
 <li>設定が柔軟</li>
@@ -66,14 +92,14 @@
 <li>td-agentを使うと捗る</li>
 </ul>
 </div>
-<div class="section" id="id2">
-<h3>構成<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id3">
+<h3>構成<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li>収集サーバ =&gt; 中間サーバ =&gt; 集計サーバ</li>
 </ul>
 </div>
-<div class="section" id="id3">
-<h3>困ったこと<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id4">
+<h3>困ったこと<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li>公式ドキュメントが古い</li>
 <li>プラグインの情報が散在</li>
@@ -85,6 +111,10 @@
 <div class="section" id="fluentdweb-fujiwara">
 <h2>fluentdでwebサイト運用を楽にする &#64;fujiwara<a class="headerlink" href="#fluentdweb-fujiwara" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
+<li>資料<ul>
+<li><a class="reference external" href="http://dl.dropbox.com/u/224433/fluentd_casual_1/index.html">http://dl.dropbox.com/u/224433/fluentd_casual_1/index.html</a></li>
+</ul>
+</li>
 <li>性能劣化の早期検出</li>
 <li>ユーザ問い合わせ対応</li>
 <li>web access log</li>
@@ -101,8 +131,8 @@
 <li>全数検査的に割合を見てみると良い</li>
 </ul>
 </div>
-<div class="section" id="id4">
-<h3>ユーザログ<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id5">
+<h3>ユーザログ<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li>fluentd =&gt; mongodb</li>
 <li>ユーザログを貯めている</li>
@@ -115,22 +145,38 @@
 </div>
 <div class="section" id="fluentd-kzk-mover">
 <h2>小さく始めるfluentd &#64;kzk_mover<a class="headerlink" href="#fluentd-kzk-mover" title="Permalink to this headline">¶</a></h2>
-<p>Tresure Data, Inc</p>
+<p>Tresure Data, Incの人</p>
 <ul class="simple">
+<li>資料<ul>
+<li><a class="reference external" href="http://www.slideshare.net/treasure-data/fluentd-for-small-projects-fluentd-casual-20120518">http://www.slideshare.net/treasure-data/fluentd-for-small-projects-fluentd-casual-20120518</a></li>
+</ul>
+</li>
 <li>tg-agent package manager</li>
 <li>messageが構造化されている<ul>
 <li>json</li>
 </ul>
 </li>
+<li>librato metrics<ul>
+<li>グラフツール</li>
 </ul>
-<p>librato metrics</p>
-<p>github issues #3</p>
-<p>伝書鳩のロゴ</p>
+</li>
+<li>github issues #3<ul>
+<li><a class="reference external" href="https://github.com/fluent/fluentd/issues/3">https://github.com/fluent/fluentd/issues/3</a></li>
+<li>伝書鳩のロゴになったよ</li>
+</ul>
+</li>
+</ul>
 </div>
 <div class="section" id="fluentd-riywo">
 <h2>fluentdを使ってみたい &#64;riywo<a class="headerlink" href="#fluentd-riywo" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
+<li>資料<ul>
+<li><a class="reference external" href="http://www.slideshare.net/riywo/i-want-to-use-fluentd">http://www.slideshare.net/riywo/i-want-to-use-fluentd</a></li>
+</ul>
+</li>
 <li>DeNAではfluentdを使ってない</li>
+<li>dstatの内容をfluentdに投げて見る</li>
+<li>td-agentのcentos対応した</li>
 </ul>
 </div>
 <div class="section" id="fluent-pulugins3-ume3">
@@ -153,6 +199,10 @@
 <div class="section" id="tnmt">
 <h2>アクセスログをごにょって捗る話 &#64;tnmt<a class="headerlink" href="#tnmt" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
+<li>資料<ul>
+<li><a class="reference external" href="https://docs.google.com/presentation/embed?id=1uFqdgCKJnD87Yad3MLTM00G9pbtWTRe1ptDn4OUC-sI">https://docs.google.com/presentation/embed?id=1uFqdgCKJnD87Yad3MLTM00G9pbtWTRe1ptDn4OUC-sI</a></li>
+</ul>
+</li>
 <li>30days album</li>
 <li>のアクセスログ</li>
 <li>rbenv + bundler</li>
@@ -162,16 +212,30 @@
 <div class="section" id="fluentd-redis-hito-asa">
 <h2>fluentd + redis レコメンドエンジン &#64;hito_asa<a class="headerlink" href="#fluentd-redis-hito-asa" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
+<li>資料<ul>
+<li><a class="reference external" href="http://www.slideshare.net/hitoasa/fluentd-casual-talks-lt-fluentd-fluentdcasual">http://www.slideshare.net/hitoasa/fluentd-casual-talks-lt-fluentd-fluentdcasual</a></li>
+</ul>
+</li>
 <li>画像投稿サービス</li>
 <li>1.3億 req /day</li>
 </ul>
 </div>
 <div class="section" id="katsyoshi">
 <h2>センサーデータ &#64;katsyoshi<a class="headerlink" href="#katsyoshi" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>資料<ul>
+<li><a class="reference external" href="http://www.slideshare.net/katsyoshi/fluentd">http://www.slideshare.net/katsyoshi/fluentd</a></li>
+</ul>
+</li>
+</ul>
 </div>
 <div class="section" id="tagomoris">
 <h2>最近作ったプラグイン &#64;tagomoris<a class="headerlink" href="#tagomoris" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
+<li>資料<ul>
+<li><a class="reference external" href="http://www.slideshare.net/tagomoris/plugins-by-tagomoris-fluentdcasual">http://www.slideshare.net/tagomoris/plugins-by-tagomoris-fluentdcasual</a></li>
+</ul>
+</li>
 <li>file-alternative</li>
 <li>hoop</li>
 <li>mysql</li>
@@ -195,7 +259,7 @@
 </ul>
 </div>
 <div class="section" id="repetedly">
-<h2>&#64;repetedly<a class="headerlink" href="#repetedly" title="Permalink to this headline">¶</a></h2>
+<h2>プラグイン開発者の憂鬱 &#64;repetedly<a class="headerlink" href="#repetedly" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li>fluent-plugin-mongo</li>
 <li>mongodbオワコン?</li>
@@ -215,16 +279,17 @@
         <div class="sphinxsidebarwrapper">
   <h3><a href="../index.html">Table Of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">fluentd casual</a><ul>
+<li><a class="reference internal" href="#">2012-05-12 fluentd casual</a><ul>
+<li><a class="reference internal" href="#id1">資料まとめ</a></li>
 <li><a class="reference internal" href="#fluentd-oranie">fluentdはじめました &#64;oranie</a><ul>
-<li><a class="reference internal" href="#id1">いいところ</a></li>
-<li><a class="reference internal" href="#id2">構成</a></li>
-<li><a class="reference internal" href="#id3">困ったこと</a></li>
+<li><a class="reference internal" href="#id2">いいところ</a></li>
+<li><a class="reference internal" href="#id3">構成</a></li>
+<li><a class="reference internal" href="#id4">困ったこと</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#fluentdweb-fujiwara">fluentdでwebサイト運用を楽にする &#64;fujiwara</a><ul>
 <li><a class="reference internal" href="#access-log">access log</a></li>
-<li><a class="reference internal" href="#id4">ユーザログ</a></li>
+<li><a class="reference internal" href="#id5">ユーザログ</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#fluentd-kzk-mover">小さく始めるfluentd &#64;kzk_mover</a></li>
@@ -236,11 +301,17 @@
 <li><a class="reference internal" href="#katsyoshi">センサーデータ &#64;katsyoshi</a></li>
 <li><a class="reference internal" href="#tagomoris">最近作ったプラグイン &#64;tagomoris</a></li>
 <li><a class="reference internal" href="#fluen-py-methene">fluen.py &#64;methene</a></li>
-<li><a class="reference internal" href="#repetedly">&#64;repetedly</a></li>
+<li><a class="reference internal" href="#repetedly">プラグイン開発者の憂鬱 &#64;repetedly</a></li>
 </ul>
 </li>
 </ul>
 
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="2012-04-28_shikakudou.html"
+                        title="previous chapter">鹿駆動 2012-04-29</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="2012-05-26_cdelivery.html"
+                        title="next chapter">継続的デリバリー2回目</a></p>
   <h3>This Page</h3>
   <ul class="this-page-menu">
     <li><a href="../sources/study/2012-05-18_fluentd_casual.txt"
@@ -269,7 +340,14 @@
         <li class="right" style="margin-right: 10px">
           <a href="../genindex.html" title="General Index"
              >index</a></li>
-        <li><a href="../index.html">masasuzu docs 1.0 documentation</a> &raquo;</li> 
+        <li class="right" >
+          <a href="2012-05-26_cdelivery.html" title="継続的デリバリー2回目"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="2012-04-28_shikakudou.html" title="鹿駆動 2012-04-29"
+             >previous</a> |</li>
+        <li><a href="../index.html">masasuzu docs 1.0 documentation</a> &raquo;</li>
+          <li><a href="index.html" >勉強会とかのメモ</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">
