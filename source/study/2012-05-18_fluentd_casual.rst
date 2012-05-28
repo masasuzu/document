@@ -13,6 +13,52 @@
 * http://www.slideshare.net/katsyoshi/fluentd
 * http://www.slideshare.net/tagomoris/plugins-by-tagomoris-fluentdcasual
 
+fluentdとは、
+============================
+
+* ググれ
+
+  * http://fluentd.org/doc/
+  * https://github.com/fluent/fluentd
+  * http://d.hatena.ne.jp/masasuz/20120520/1337518231
+  * rvmで入れられる
+  * treasure dataがdeb packageを提供しているのでこっちを使うとお手軽
+
+    * https://github.com/treasure-data/td-agent
+
+* ログを転送、収集ツール
+* ログデータのフォーマットはJSON
+* 入力
+
+  * アプリがログを投げる
+  * 既存のログをtail
+  * 他のfluentdから転送
+
+* 出力
+
+  * ファイル
+  * メール
+  * DB mongodbとか
+  * growthforecast
+
+何となく私見
+============================
+
+以下自己メモ
+
+* ひとまず、32bit lennyのdebを作るのはできたから、ちょこちょこ試したい。
+* ログを貯めるのはmongdbかなー。
+
+  * その辺も検証しないといけないから、まずはファイルかな。
+
+* apache logをtailして転送が一番実現が早いかな。
+* errorlogをパースして集約するとものすごい捗りそう
+* accesslogを集計してレスポンスタイムを可視化したい
+
+  * http://dl.dropbox.com/u/224433/fluentd_casual_1/index.html#15
+
+* CPUをけっこう使うとか言われているけど、大規模じゃ無ければ大丈夫かな?
+
 fluentdはじめました @oranie
 ============================
 
