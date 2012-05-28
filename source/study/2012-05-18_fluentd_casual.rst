@@ -1,10 +1,24 @@
-================
-fluentd casual
-================
+============================
+2012-05-12 fluentd casual
+============================
 
+資料まとめ
+=============
+
+* http://togetter.com/li/305806
+* http://dl.dropbox.com/u/224433/fluentd_casual_1/index.html
+* http://www.slideshare.net/oranie/fluentd-casual-12981506
+* http://www.slideshare.net/treasure-data/fluentd-for-small-projects-fluentd-casual-20120518
+* https://docs.google.com/presentation/embed?id=1uFqdgCKJnD87Yad3MLTM00G9pbtWTRe1ptDn4OUC-sI
+* http://www.slideshare.net/katsyoshi/fluentd
+* http://www.slideshare.net/tagomoris/plugins-by-tagomoris-fluentdcasual
 
 fluentdはじめました @oranie
-=============
+============================
+
+* 資料
+
+  * http://www.slideshare.net/oranie/fluentd-casual-12981506
 
 * カジュアル枠で参加
 * fluentd使ってみました
@@ -47,10 +61,12 @@ fluentdはじめました @oranie
 
 fluentdでwebサイト運用を楽にする @fujiwara
 ============================================
+* 資料
+
+  * http://dl.dropbox.com/u/224433/fluentd_casual_1/index.html
 
 * 性能劣化の早期検出
 * ユーザ問い合わせ対応
-
 
 
 * web access log
@@ -86,7 +102,11 @@ access log
 小さく始めるfluentd @kzk_mover
 ===============================
 
-Tresure Data, Inc
+Tresure Data, Incの人
+
+* 資料
+
+  * http://www.slideshare.net/treasure-data/fluentd-for-small-projects-fluentd-casual-20120518
 
 * tg-agent package manager
 
@@ -95,16 +115,29 @@ Tresure Data, Inc
 
   * json
 
-librato metrics
+* librato metrics
 
-github issues #3
+  * グラフツール
 
-伝書鳩のロゴ
+* github issues #3
+
+  * https://github.com/fluent/fluentd/issues/3
+  * 伝書鳩のロゴになったよ
 
 fluentdを使ってみたい @riywo
 ================================
 
+* 資料
+
+  * http://www.slideshare.net/riywo/i-want-to-use-fluentd
+
 * DeNAではfluentdを使ってない
+
+* dstatの内容をfluentdに投げて見る
+
+* td-agentのcentos対応した
+
+
 
 fluent-pulugins3を使ってみた @ume3_
 ========================================
@@ -130,6 +163,10 @@ Javaアプリからfluentdにログを送信する @tanaka_733
 アクセスログをごにょって捗る話 @tnmt
 ==========================================
 
+* 資料
+
+  * https://docs.google.com/presentation/embed?id=1uFqdgCKJnD87Yad3MLTM00G9pbtWTRe1ptDn4OUC-sI
+
 * 30days album
 * のアクセスログ
 
@@ -141,6 +178,10 @@ Javaアプリからfluentdにログを送信する @tanaka_733
 fluentd + redis レコメンドエンジン @hito_asa
 ==============================================
 
+* 資料
+
+  * http://www.slideshare.net/hitoasa/fluentd-casual-talks-lt-fluentd-fluentdcasual
+
 * 画像投稿サービス
 
 * 1.3億 req /day
@@ -148,8 +189,16 @@ fluentd + redis レコメンドエンジン @hito_asa
 センサーデータ @katsyoshi
 ==========================================
 
+* 資料
+
+  * http://www.slideshare.net/katsyoshi/fluentd
+
 最近作ったプラグイン @tagomoris
 ==========================================
+
+* 資料
+
+  * http://www.slideshare.net/tagomoris/plugins-by-tagomoris-fluentdcasual
 
 * file-alternative
 * hoop
@@ -173,7 +222,7 @@ fluen.py @methene
 
 * pluginが少ない
 
-@repetedly
+プラグイン開発者の憂鬱 @repetedly
 ==========================================
 
 * fluent-plugin-mongo
