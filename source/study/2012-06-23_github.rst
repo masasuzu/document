@@ -1,0 +1,171 @@
+=========================================
+2012-06-23 The GitHub poweredby Agile渋谷
+=========================================
+
+* http://atnd.org/events/30016
+
+資料
+================================
+
+* http://www.slideshare.net/koichiro/agile-shibuya-githubenterprise
+
+pythonとgihubとベンチャー機能
+================================
+
+@tfmagician
+藤原さん
+
+FULLER株式会社のひと
+
+Dig App
+過去のアプリランキング
+
+Pitta
+Twitterクライアント
+
+開発フロー
+===============
+
+* かんばん
+
+* リーンスタートアップ
+
+* github
+
+  * github カンパニーアカウントのプライベートレポジトリ
+  * 個人アカウントのプライベートレポジトリを活用
+
+  * asuccessful git branching model
+
+  * issuesラベル
+
+    * Bug Experimence Kaizen
+
+  * wiki
+
+    * 社内wiki
+    * プロジェクトwiki
+
+  * ベンチャーには丘ながない
+
+    * 社内ツールとかはgitolite
+
+
+python
+==============
+
+* hyde
+* legit - aliasを作ってくれる
+* pyramid
+* cornice
+* mongoengine
+* fabric
+
+
+
+
+
+knit
+====================
+
+永和のひと
+
+受託開発でのgithub
+
+
+ソースコードレビュー
+
+
+トピックブランチをまず切る
+実装したらpull requestする
+merge pull requestをしたらトピックブランチを消す
+
+
+困ったこと
+--------------
+
+pull reqがたまる
+binary fileのdiff
+
+
+朝会で今日の pull reqを確認
+
+参加のソーシャルコーディング
+=============================
+
+
+松田さんのデブサミの資料を見ると良いよ > ソーシャルコーディング
+
+railsにpull reqを送ったはなし
+
+科学の世界の公用語は英語では無くpoor english
+他の人のpull reqが参考になる
+
+@HIROCASTER
+====================
+
+WEB+DB Pressを買ってね
+
+Pull req送ってね
+
+github enterpriseとはなんだったのか
+========================================
+
+* http://www.slideshare.net/koichiro/agile-shibuya-githubenterprise
+
+greeのひと
+
+スタートアップruby でるよ
+
+@a_matsuda 松田さん
+Alpha SOcial Coder
+
+
+ソーシャルコーディング三部作
+
+開発環境全般を整えるお仕事
+
+
+githubは人が主体
+source forge プロジェクトが主体
+
+github:enterpriseとは
+
+会社という閉じた空間に置くとソーシャルでなくなる
+
+githubの導入に当たって
+開発のライフサイクルをどう使うかを考えないとまずい
+
+デブサミ夏で話します
+
+
+gitホスティングサイトの気になる中身
+======================================
+
+Nulabのひと
+@ikikko
+
+backlogのgit対応
+
+
+Amoingのgithubの開発フロー
+======================================
+
+pull req形式でやっている
+
+gitペア作業
+
+プライベートリポジトリ便利
+
+hubコマンドが便利
+
+
+vcs quest
+======================================
+
+git-svnを使って並行運用
+
+svnは参照専用
+
+gt filter-branch 黒魔術
+
