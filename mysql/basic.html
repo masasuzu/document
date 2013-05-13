@@ -101,9 +101,28 @@
 </div>
 <div class="section" id="id8">
 <h2>インデックス<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="b-tree-b-tree">
+<h3>B-Tree / B+Tree インデックス<a class="headerlink" href="#b-tree-b-tree" title="Permalink to this headline">¶</a></h3>
+<p>B-Treeインデックスの特徴はどんな場面においてもそこそこの性能がでるということです。
+個々のシチュエーションでは、B-Treeインデックスを上回るパフォーマンスを出せるインデックスはありますが、どの場面でもB-Treeインデックスは頑張ってくれます。</p>
+<dl class="docutils">
+<dt><em>均一性</em></dt>
+<dd>B-Treeとは平衡木を意味し、どのリーフノードもルートからの距離が一定の長さとなります。つまり、どんなキーで検索しても同じ計算時間で探索することできます。</dd>
+<dt><em>持続性</em></dt>
+<dd>最初の内は綺麗な平衡木をとっていますが、更新削除を繰り返される内に平衡木が崩れていきますが、それでも、B-Treeインデックスは他のインデックスと比べ劣化の速度はゆるやかです。</dd>
+<dt><em>処理汎用性</em></dt>
+<dd>選択、挿入、削除のコストはデータ量に対してO(log n)なのでデータ量が増えても性能劣化が緩やか。</dd>
+<dt><em>非等値性</em></dt>
+<dd>等号(=)のみならず不等号や範囲検索もそこそこ高速に行えます。</dd>
+</dl>
+<p><em>親ソート性</em></p>
 </div>
 <div class="section" id="id9">
-<h2>トランザクション<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h2>
+<h3>ハッシュインデックス<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h3>
+</div>
+</div>
+<div class="section" id="id10">
+<h2>トランザクション<a class="headerlink" href="#id10" title="Permalink to this headline">¶</a></h2>
 </div>
 </div>
 
@@ -123,8 +142,12 @@
 <li><a class="reference internal" href="#id5">物理設計</a></li>
 <li><a class="reference internal" href="#id6">論理設計</a></li>
 <li><a class="reference internal" href="#id7">正規化</a></li>
-<li><a class="reference internal" href="#id8">インデックス</a></li>
-<li><a class="reference internal" href="#id9">トランザクション</a></li>
+<li><a class="reference internal" href="#id8">インデックス</a><ul>
+<li><a class="reference internal" href="#b-tree-b-tree">B-Tree / B+Tree インデックス</a></li>
+<li><a class="reference internal" href="#id9">ハッシュインデックス</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id10">トランザクション</a></li>
 </ul>
 </li>
 </ul>
